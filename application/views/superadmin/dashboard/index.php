@@ -20,6 +20,7 @@
                         <p class="text-muted page-title-alt">Welcome to Metropoint!</p>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-6 col-lg-3">
                         <div class="widget-bg-color-icon card-box fadeInDown animated">
@@ -33,6 +34,7 @@
                             <div class="clearfix"></div>
                         </div>
                     </div>
+
                     <div class="col-md-6 col-lg-3">
                         <div class="widget-bg-color-icon card-box">
                             <div class="bg-icon bg-icon-pink pull-left">
@@ -45,6 +47,7 @@
                             <div class="clearfix"></div>
                         </div>
                     </div>
+
                     <div class="col-md-6 col-lg-3">
                         <div class="widget-bg-color-icon card-box">
                             <div class="bg-icon bg-icon-purple pull-left">
@@ -57,6 +60,7 @@
                             <div class="clearfix"></div>
                         </div>
                     </div>
+
                     <div class="col-md-6 col-lg-3">
                         <div class="widget-bg-color-icon card-box">
                             <div class="bg-icon bg-icon-success pull-left">

@@ -70,15 +70,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
-$active_group = 'default';
+
+if (isset($_SERVER['SERVER_NAME'])) {
+    if ($_SERVER['SERVER_NAME'] == 'metropoint.local') {
+        $active_group = 'default';
+    } else if ($_SERVER['SERVER_NAME'] == 'experiment.kedrasoft.com') {
+        $active_group = 'live';
+    }
+}else{
+    $active_group = 'default';
+}
 $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => '',
+	'username' => 'root',
 	'password' => '',
-	'database' => '',
+	'database' => 'mpoint_db',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
