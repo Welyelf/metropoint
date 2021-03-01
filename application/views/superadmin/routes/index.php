@@ -17,36 +17,38 @@
                 <!-- Page-Title -->
                 <div class="row">
                     <div class="col-sm-12">
-                        <h4 class="page-title">Bus Tpyes</h4>
-                        <p class="text-muted page-title-alt">Lists of Bus types!</p>
+                        <h4 class="page-title">Routes</h4>
+                        <p class="text-muted page-title-alt">Lists of all Routes!</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 text-xs-center">
                         <div class="form-group">
-                            <a href="<?= base_url('superadmin/types/add') ?>" id="demo-btn-addrow" class="btn btn-default m-b-20"><i class="fa fa-plus m-r-5"></i> Add New Engine</a>
+                            <a href="<?= base_url('superadmin/routes/add') ?>" id="demo-btn-addrow" class="btn btn-default m-b-20"><i class="fa fa-plus m-r-5"></i> Add New Route</a>
                         </div>
                     </div>
                     <table id="datatable" class="table table-striped table-bordered table-responsive">
                         <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Alias</th>
-                            <th>Date</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($engines as $engine): ?>
+                            <?php foreach ($routes as $route): ?>
                             <tr>
-                                <td><?= $engine->name; ?></td>
-                                <td><?= $engine->name_alias; ?></td>
-                                <td><?= date('m/d/Y', strtotime($engine->datetime)); ?></td>
+                                <td><?= $route->route_from; ?></td>
+                                <td><?= $route->route_to; ?></td>
+                                <td><?= $route->start_time; ?></td>
+                                <td><?= $route->end_time; ?></td>
                                 <td>
-                                    <a href="<?= base_url('superadmin/types/edit/'.$engine->id);  ?>" id="demo-btn-addrow" class="btn btn-primary m-b-20">
+                                    <a href="<?= base_url('superadmin/routes/edit/'.$route->id);  ?>" id="demo-btn-addrow" class="btn btn-primary m-b-20">
                                         <i class="fa fa-pencil m-r-5"></i> Edit
                                     </a>
-                                    <a id="<?= $engine->id  ?>" class="btn btn-primary m-b-20 remove_engine">
+                                    <a id="<?= $route->id  ?>" class="btn btn-primary m-b-20 remove_engine">
                                         <i class="fa fa-trash-o m-r-5"></i> Delete
                                     </a>
                                 </td>
@@ -85,7 +87,7 @@
                 if (result.value) {
                     $.ajax({
                         type: "POST",
-                        url: "<?= base_url() ?>superadmin/types/delete_bus_type",
+                        url: "<?= base_url() ?>superadmin/routes/delete_route",
                         data: {id : ID}, // serializes the form's elements.
                         success: function(data)
                         {

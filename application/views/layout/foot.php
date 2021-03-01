@@ -23,8 +23,9 @@
 <script src="<?= base_url(); ?>assets/plugins/waypoints/lib/jquery.waypoints.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/counterup/jquery.counterup.min.js"></script>
 
+<script src="<?= base_url(); ?>assets/plugins/moment/moment.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
 
-<script src="<?= base_url(); ?>assets/plugins/raphael/raphael-min.js"></script>
 
 <script src="<?= base_url(); ?>assets/plugins/jquery-knob/jquery.knob.js"></script>
 

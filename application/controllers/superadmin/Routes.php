@@ -8,6 +8,7 @@ class Routes extends MY_Controller
     {
         parent::__construct();
         $this->load->model('General_model', 'general');
+        $this->load->helper('functions');
     }
 
     public function index()
@@ -29,6 +30,9 @@ class Routes extends MY_Controller
     public function add(){
         $input = $this->input->post();
         if ($input) {
+            unset($input['hour']);
+            unset($input['minute']);
+            unset($input['meridian']);
             if($this->general->add_($input, 'mp_routes')){
                 redirect(base_url("superadmin/routes/"));
             }
@@ -51,12 +55,12 @@ class Routes extends MY_Controller
             'table' => 'mp_routes',
             'select' => '*',
         );
-        $this->data['engine_details'] = $this->general->get_data_with_param($get_login_user,FALSE);
+        $this->data['route_details'] = $this->general->get_data_with_param($get_login_user,FALSE);
         $this->data['title'] = "Metropoint - Routes";
-        $this->load->view('superadmin/types/edit', $this->data);
+        $this->load->view('superadmin/routes/edit', $this->data);
     }
 
-    public function delete_bus_type() {
+    public function delete_route() {
         $remove_engine = array(
             'where' => array(
                 'id' => $_POST['id']
