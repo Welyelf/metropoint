@@ -31,6 +31,7 @@
                         <thead>
                         <tr>
                             <th>Fullname</th>
+                            <th>Username</th>
                             <th>Base Terminal</th>
                             <th>User Type</th>
                             <th>Contact No</th>
@@ -42,29 +43,14 @@
                             <?php foreach ($users as $user): ?>
                             <tr>
                                 <td><?= $user->firstname.' '.$user->lastname ?></td>
+                                <td><?= $user->username ?></td>
                                 <td><?= $user->name ?></td>
-                                <td>
-                                    <?php
-                                        if($user->user_type == 0){
-                                            echo 'SuperAdmin';
-                                        }else if($user->user_type == 1){
-                                            echo 'Admin';
-                                        }else if($user->user_type == 1){
-                                            echo 'Operator';
-                                        }else if($user->user_type == 1){
-                                            echo 'Dispatcher';
-                                        }else if($user->user_type == 1){
-                                            echo 'Driver';
-                                        }else if($user->user_type == 1){
-                                            echo 'Conductor';
-                                        }
-                                    ?>
-                                </td>
+                                <td><?= user_types($user->user_type); ?></td>
                                 <td><?= $user->contact_no ?></td>
                                 <td><?= employment_status($user->status); ?>
                                 </td>
                                 <td>
-                                    <a href="<?= base_url('superadmin/users/edit/'.$user->id);  ?>" id="demo-btn-addrow" class="btn btn-primary m-b-20">
+                                    <a href="<?= base_url('superadmin/users/edit/'.$user->user_id);  ?>" id="demo-btn-addrow" class="btn btn-primary m-b-20">
                                         <i class="fa fa-pencil m-r-5"></i> Edit
                                     </a>
                                     <a id="<?=$user->id;?>" class="btn btn-primary m-b-20 remove_user">

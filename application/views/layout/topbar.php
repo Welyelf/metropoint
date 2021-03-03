@@ -24,7 +24,8 @@
                         <a href="#" id="btn-fullscreen" class="waves-effect waves-light"><i class="icon-size-fullscreen"></i></a>
                     </li>
                     <li class="dropdown">
-                        <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="<?= base_url(); ?>assets/images/users/avatar-1.jpg" alt="user-img" class="img-circle"> </a>
+                        <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true">
+                            <img src="<?= base_url(); ?>assets/images/users/avatar-1.jpg" alt="user-img" class="img-circle"> </a>
                         <ul class="dropdown-menu">
                             <li><a href="javascript:void(0)"><i class="ti-dashboard m-r-5"></i> Dashboard</a></li>
                             <li><a href="<?= base_url('superadmin/bus/'); ?>"><i class="md  md-directions-bus m-r-5"></i> Buses</a></li>
@@ -33,7 +34,7 @@
                             <li><a href="<?= base_url('superadmin/routes/'); ?>"><i class="fa fa-road m-r-5"></i> Routes</a></li>
                             <li><a href="<?= base_url('superadmin/engine/'); ?>"><i class="ti-settings m-r-5"></i> Engines</a></li>
                             <li><a href="<?= base_url('superadmin/users/'); ?>"><i class="fa fa-users m-r-5"></i>Users</a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-power-off m-r-5"></i> Logout</a></li>
+                            <li><a href="<?= base_url('auth/logout/'); ?>"><i class="ti-power-off m-r-5"></i> Logout</a></li>
                         </ul>
                     </li>
                 </ul>

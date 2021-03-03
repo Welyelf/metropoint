@@ -17,3 +17,13 @@ function employment_status($index=0){
     }
     return $status[$index];
 }
+
+function user_types($index=0){
+    $types = array('SuperAdmin','Admin','Operator','Dispatcher','Driver','Conductor');
+    if($index<0 || $index>=count($types)){
+        $index=0;
+    }else if(!is_int($index)){
+        $index=0;
+    }
+    return $types[$index];
+}
