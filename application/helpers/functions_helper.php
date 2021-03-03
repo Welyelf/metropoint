@@ -7,3 +7,13 @@ function routes($is_count=FALSE){
     }
     return $name_suffix;
 }
+
+function employment_status($index=0){
+    $status = array('Regular','Casual','Terminated','Suspended');
+    if($index<0 || $index>=count($status)){
+        $index=0;
+    }else if(!is_int($index)){
+        $index=0;
+    }
+    return $status[$index];
+}

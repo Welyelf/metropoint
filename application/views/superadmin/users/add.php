@@ -22,23 +22,24 @@ $this->load->view('layout/topbar');
             <div class="row">
                 <div class="col-sm-12 text-xs-center">
                     <div class="col-md-12">
-                        <form class="form-horizontal" role="form">
+                        <form class="form-horizontal" role="form" method="post">
                             <div class="form-group">
                                 <label class="col-md-2 control-label">User Type</label>
                                 <div class="col-md-10">
                                     <select name="user_type" class="form-control" data-style="btn-white">
                                         <option value="1">Admin</option>
-                                        <option value="4">Conductor</option>
-                                        <option value="5">Driver</option>
+                                        <!--<option value="4">Conductor</option>
+                                        <option value="5">Driver</option>-->
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="example-email">Base Terminal</label>
                                 <div class="col-md-10">
-                                    <select id="base_termnial" name="base_termnial" class="form-control" data-style="btn-white">
-                                        <option value="1">Davao</option>
-                                        <option value="2">Tagum</option>
+                                    <select id="base_terminal" name="base_terminal" class="form-control" data-style="btn-white">
+                                        <?php foreach ($terminals as $terminal): ?>
+                                            <option value="<?= $terminal->id; ?>"><?= $terminal->name; ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
@@ -124,8 +125,8 @@ $this->load->view('layout/topbar');
                             </div>
                             <div class="modal-footer modal-footer-detail">
                                 <div class="button-modal-list">
-                                    <button id="demo-btn-addrow" class="btn btn-danger m-b-20 text-right"><i class="fa fa-remove m-r-5"></i> Cancel</button>
-                                    <button id="demo-btn-addrow" class="btn btn-default m-b-20 text-right"><i class="fa fa-paper-plane-o m-r-5"></i> Save</button>
+                                    <a href="<?= base_url('superadmin/users/') ?>" class="btn btn-danger m-b-20 text-right"><i class="fa fa-remove m-r-5"></i> Cancel</a>
+                                    <button type="submit" class="btn btn-default m-b-20 text-right"><i class="fa fa-paper-plane-o m-r-5"></i> Save</button>
                                 </div>
                             </div>
 

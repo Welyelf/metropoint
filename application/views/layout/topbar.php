@@ -28,6 +28,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="javascript:void(0)"><i class="ti-dashboard m-r-5"></i> Dashboard</a></li>
                             <li><a href="<?= base_url('superadmin/bus/'); ?>"><i class="md  md-directions-bus m-r-5"></i> Buses</a></li>
+                            <li><a href="<?= base_url('superadmin/terminal/'); ?>"><i class="md  md-directions-train m-r-5"></i> Base Terminals</a></li>
                             <li><a href="<?= base_url('superadmin/types/'); ?>"><i class="md  md-directions-train m-r-5"></i> Bus Types</a></li>
                             <li><a href="<?= base_url('superadmin/routes/'); ?>"><i class="fa fa-road m-r-5"></i> Routes</a></li>
                             <li><a href="<?= base_url('superadmin/engine/'); ?>"><i class="ti-settings m-r-5"></i> Engines</a></li>

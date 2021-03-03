@@ -17,57 +17,34 @@
                 <!-- Page-Title -->
                 <div class="row">
                     <div class="col-sm-12">
-                        <h4 class="page-title">Users</h4>
-                        <p class="text-muted page-title-alt">Lists of Users!</p>
+                        <h4 class="page-title">Terminals</h4>
+                        <p class="text-muted page-title-alt">Lists of base terminal!</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 text-xs-center">
                         <div class="form-group">
-                            <a href="<?= base_url('superadmin/users/add') ?>" id="demo-btn-addrow" class="btn btn-default m-b-20"><i class="fa fa-plus m-r-5"></i> Add New User</a>
+                            <a href="<?= base_url('superadmin/terminal/add') ?>" id="demo-btn-addrow" class="btn btn-default m-b-20"><i class="fa fa-plus m-r-5"></i> Add New Base Terminal</a>
                         </div>
                     </div>
                     <table id="datatable" class="table table-striped table-bordered table-responsive">
                         <thead>
                         <tr>
-                            <th>Fullname</th>
-                            <th>Base Terminal</th>
-                            <th>User Type</th>
-                            <th>Contact No</th>
-                            <th>Status</th>
+                            <th>Name</th>
+                            <th>Date</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($users as $user): ?>
+                            <?php foreach ($terminals as $terminal): ?>
                             <tr>
-                                <td><?= $user->firstname.' '.$user->lastname ?></td>
-                                <td><?= $user->name ?></td>
+                                <td><?= $terminal->name; ?></td>
+                                <td><?= date('m/d/Y', strtotime($terminal->datetime)); ?></td>
                                 <td>
-                                    <?php
-                                        if($user->user_type == 0){
-                                            echo 'SuperAdmin';
-                                        }else if($user->user_type == 1){
-                                            echo 'Admin';
-                                        }else if($user->user_type == 1){
-                                            echo 'Operator';
-                                        }else if($user->user_type == 1){
-                                            echo 'Dispatcher';
-                                        }else if($user->user_type == 1){
-                                            echo 'Driver';
-                                        }else if($user->user_type == 1){
-                                            echo 'Conductor';
-                                        }
-                                    ?>
-                                </td>
-                                <td><?= $user->contact_no ?></td>
-                                <td><?= employment_status($user->status); ?>
-                                </td>
-                                <td>
-                                    <a href="<?= base_url('superadmin/users/edit/'.$user->id);  ?>" id="demo-btn-addrow" class="btn btn-primary m-b-20">
+                                    <a href="<?= base_url('superadmin/terminal/edit/'.$terminal->id);  ?>" id="demo-btn-addrow" class="btn btn-primary m-b-20">
                                         <i class="fa fa-pencil m-r-5"></i> Edit
                                     </a>
-                                    <a id="<?=$user->id;?>" class="btn btn-primary m-b-20 remove_user">
+                                    <a id="<?= $terminal->id  ?>" class="btn btn-primary m-b-20 remove_terminal">
                                         <i class="fa fa-trash-o m-r-5"></i> Delete
                                     </a>
                                 </td>
@@ -87,10 +64,11 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#datatable').dataTable({
+        $('#datatable').dataTable(
+            {
 
-        });
-        $(".remove_user").on( "click", function( event ) {
+            });
+        $(".remove_terminal").on( "click", function( event ) {
             var ID=this.id;
             // alert(ID);
             Swal.fire({
@@ -106,7 +84,7 @@
                 if (result.value) {
                     $.ajax({
                         type: "POST",
-                        url: "<?= base_url() ?>superadmin/users/delete_user",
+                        url: "<?= base_url() ?>superadmin/terminal/delete_terminal",
                         data: {id : ID}, // serializes the form's elements.
                         success: function(data)
                         {
@@ -119,6 +97,6 @@
                     });
                 }
             });
-        })
+        });
     } );
 </script>
