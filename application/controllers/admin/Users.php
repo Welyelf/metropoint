@@ -13,9 +13,15 @@ class Users extends MY_Controller
 
     public function index()
     {
+        $base_terminal_id = $_SESSION['user']->base_terminal;
         $this->data['title'] = "Metropoint - Users";
         // get all job tags
         $get_users = array(
+            'where' => array(
+                'base_terminal' => $base_terminal_id,
+                'user_type' => 2,
+                'user_type' => 3,
+            ),
             'table' => 'mp_users',
             'select' => '*,mp_users.id as user_id',
             'join' => array(
@@ -25,7 +31,7 @@ class Users extends MY_Controller
             ),
         );
         $this->data['users'] = $this->general->get_data_with_param($get_users);
-        $this->load->view('superadmin/users/index', $this->data);
+        $this->load->view('admin/users/index', $this->data);
     }
 
     public function add(){

@@ -8,9 +8,8 @@ class Auth extends CI_Controller {
         parent::__construct();
 
         // Required Libraries
-        if (!class_exists('bcrypt')) { $this->load->library('bcrypt'); }
-        if (!class_exists('session')) { $this->load->library('session'); }
-
+        $this->load->library('bcrypt');
+        $this->load->library('session');
 
         // Required Configs
         //$this->config->load('auth');
@@ -31,25 +30,26 @@ class Auth extends CI_Controller {
                 'select' => '*',
             );
             $user = $this->general->get_data_with_param($get_login_user,FALSE);
+            //print_r($user);
             if ($user) {
-                    if ($this->bcrypt->check_password($input['password'], $user->password)) { //if ($input['password']== $user->password)
-                        $this->session->set_userdata('user', $user);
-                        if ($user->user_type == 0) {
-                            redirect(base_url('superadmin/dashboard'));
-                        } else if ($user->user_type == 1)  {
-                            redirect(base_url('superadmin/bus/'));
-                        } else if ($user->user_type == 2 || $user->user_type == 3) {
-                            redirect(base_url('superadmin/dashboard'));
-                        }else if ($user->user_type == 4 || $user->user_type == 5) {
-                            redirect(base_url('superadmin/dashboard'));
-                        }else{
-                            $this->data['error'] = "User doesn't have a role.";
-                        }
-                        exit;
-                    } else {
-                        $this->data['error'] = "Invalid Username and/or Password.";
+                if ($this->bcrypt->check_password($input['password'], $user->password)) { //if ($input['password']== $user->password)
+                    $this->session->set_userdata('user', $user);
+                    if ($user->user_type == 0) {
+                        redirect(base_url('superadmin/dashboard'));
+                    } else if ($user->user_type == 1)  {
+                        redirect(base_url('admin/users'));
+                    } else if ($user->user_type == 2 || $user->user_type == 3) {
+                        redirect(base_url('superadmin/dashboard'));
+                    }else if ($user->user_type == 4 || $user->user_type == 5) {
+                        redirect(base_url('superadmin/dashboard'));
+                    }else{
+                        $this->data['error'] = "User doesn't have a role.";
                     }
-                } else {
+                    exit;
+                }else {
+                    $this->data['error'] = "Invalid Username and/or Password.";
+                }
+            }else {
                 $this->data['error'] = "Email Address don't exist.";
             }
         }

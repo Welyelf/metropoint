@@ -33,6 +33,17 @@
 <div class="clearfix"></div>
 <div class="wrapper-page">
     <div class=" card-box">
+        <?php if(isset($error)) {
+            ?>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Error!</strong> <?php echo $error; ?>
+            </div>
+            <?php
+        }
+        ?>
         <div class="panel-heading">
             <center><img src="<?= base_url(); ?>assets/images/bus.png" width="70" alt="user-img" class="img-responsive"></center>
             <h3 class="text-center"> Sign In to <strong class="text-default">MetroPoint</strong> </h3>
