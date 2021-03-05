@@ -23,7 +23,7 @@
                 <div class="row">
                     <div class="col-sm-12 text-xs-center">
                         <div class="form-group">
-                            <a href="<?= base_url('superadmin/users/add') ?>" id="demo-btn-addrow" class="btn btn-default m-b-20"><i class="fa fa-plus m-r-5"></i> Add New User</a>
+                            <a href="<?= base_url('admin/users/add') ?>" id="demo-btn-addrow" class="btn btn-default m-b-20"><i class="fa fa-plus m-r-5"></i> Add New User</a>
                         </div>
                     </div>
                     <table id="datatable" class="table table-striped table-bordered table-responsive">
@@ -91,7 +91,7 @@
                 if (result.value) {
                     $.ajax({
                         type: "POST",
-                        url: "<?= base_url() ?>superadmin/users/delete_user",
+                        url: "<?= base_url() ?>admin/users/delete_user",
                         data: {id : ID}, // serializes the form's elements.
                         success: function(data)
                         {

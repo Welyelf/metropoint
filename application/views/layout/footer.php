@@ -1,3 +1,3 @@
 <footer class="footer text-right">
-    2015 © Ubold.
+    2021 © MetroPoint. <br>Davao Metro Shuttle
 </footer>

@@ -38,7 +38,9 @@ class Auth extends CI_Controller {
                         redirect(base_url('superadmin/dashboard'));
                     } else if ($user->user_type == 1)  {
                         redirect(base_url('admin/users'));
-                    } else if ($user->user_type == 2 || $user->user_type == 3) {
+                    } else if ($user->user_type == 2) {
+                        redirect(base_url('operator/users'));
+                    }else if ($user->user_type == 3) {
                         redirect(base_url('superadmin/dashboard'));
                     }else if ($user->user_type == 4 || $user->user_type == 5) {
                         redirect(base_url('superadmin/dashboard'));

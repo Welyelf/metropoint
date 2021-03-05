@@ -27,8 +27,9 @@ $this->load->view('layout/topbar');
                                 <label class="col-md-2 control-label">User Type</label>
                                 <div class="col-md-10">
                                     <select name="user_type" class="form-control" data-style="btn-white">
-                                        <option value="2">Operator</option>
-                                        <option value="3">Dispatcher</option>
+                                        <option value="1">Admin</option>
+                                        <!--<option value="4">Conductor</option>
+                                        <option value="5">Driver</option>-->
                                     </select>
                                 </div>
                             </div>
@@ -37,7 +38,7 @@ $this->load->view('layout/topbar');
                                 <div class="col-md-10">
                                     <select id="base_terminal" name="base_terminal" class="form-control" data-style="btn-white">
                                         <?php foreach ($terminals as $terminal): ?>
-                                            <option value="<?= $terminal->id; ?>"><?= $terminal->name; ?></option>
+                                            <option <?= $user_details->base_terminal == $terminal->id ? 'selected' : ''; ?> value="<?= $terminal->id; ?>"><?= $terminal->name; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -45,37 +46,37 @@ $this->load->view('layout/topbar');
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="example-email">Username</label>
                                 <div class="col-md-10">
-                                    <input type="text" id="username" name="username" class="form-control" required>
+                                    <input type="text" value="<?= $user_details->username; ?>" id="username" name="username" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="example-email">Password</label>
                                 <div class="col-md-10">
-                                    <input type="password" id="password" name="password" class="form-control" required>
+                                    <input type="password" id="password" name="password" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="example-email">Firstname</label>
                                 <div class="col-md-10">
-                                    <input type="text" id="firstname" name="firstname" class="form-control" required>
+                                    <input type="text" value="<?= $user_details->firstname; ?>" id="firstname" name="firstname" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="example-email">Lastname</label>
                                 <div class="col-md-10">
-                                    <input type="text" id="lastname" name="lastname" class="form-control" required>
+                                    <input type="text" value="<?= $user_details->lastname; ?>" id="lastname" name="lastname" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="example-email">Middile Initial</label>
                                 <div class="col-md-10">
-                                    <input type="text" id="mi" name="mi" class="form-control">
+                                    <input type="text" value="<?= $user_details->mi; ?>" id="mi" name="mi" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="example-email">Suffix</label>
                                 <div class="col-md-10">
-                                    <input type="text" id="suffix" name="suffix" class="form-control">
+                                    <input type="text" value="<?= $user_details->suffix; ?>" id="suffix" name="suffix" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -90,7 +91,7 @@ $this->load->view('layout/topbar');
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="example-email">Contact Number</label>
                                 <div class="col-md-10">
-                                    <input type="text" id="contact_no" name="contact_no" class="form-control">
+                                    <input type="text" value="<?= $user_details->contact_no; ?>" id="contact_no" name="contact_no" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -107,19 +108,19 @@ $this->load->view('layout/topbar');
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="example-email">Employment Date</label>
                                 <div class="col-md-10">
-                                    <input type="text" id="employment_date" name="employment_date" class="form-control" placeholder="Optional...">
+                                    <input type="text" value="<?= $user_details->employment_date; ?>" id="employment_date" name="employment_date" class="form-control" placeholder="Optional...">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="example-email">Driver License</label>
                                 <div class="col-md-10">
-                                    <input type="text" id="driver_license" name="driver_license" class="form-control" placeholder="Optional...">
+                                    <input type="text" value="<?= $user_details->driver_license; ?>" id="driver_license" name="driver_license" class="form-control" placeholder="Optional...">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="example-email">License Experience Date</label>
                                 <div class="col-md-10">
-                                    <input type="text" id="license_exp_date" name="license_exp_date" class="form-control" placeholder="Optional...">
+                                    <input type="text" value="<?= $user_details->license_exp_date; ?>" id="license_exp_date" name="license_exp_date" class="form-control" placeholder="Optional...">
                                 </div>
                             </div>
                             <div class="modal-footer modal-footer-detail">

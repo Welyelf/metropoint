@@ -18,11 +18,10 @@ class Users extends MY_Controller
         // get all job tags
         $get_users = array(
             'where' => array(
-                'base_terminal' => $base_terminal_id,
-                'user_type' => 2,
+                'user_type' => 4,
             ),
             'or_where' => array(
-                'user_type' => 3,
+                'user_type' => 5,
             ),
             'table' => 'mp_users',
             'select' => '*,mp_users.id as user_id',
@@ -33,7 +32,7 @@ class Users extends MY_Controller
             ),
         );
         $this->data['users'] = $this->general->get_data_with_param($get_users);
-        $this->load->view('admin/users/index', $this->data);
+        $this->load->view('operator/users/index', $this->data);
     }
 
     public function add(){
@@ -44,7 +43,7 @@ class Users extends MY_Controller
             $input['password'] = $this->bcrypt->hash_password($input['password']);
             $input['datetime'] = date("d-m-Y h:i A");
             if($this->general->add_($input, 'mp_users')){
-                redirect(base_url('admin/users/'));
+                redirect(base_url('operator/users/'));
             }
         }
         $base_terminal_id = $_SESSION['user']->base_terminal;
@@ -57,7 +56,7 @@ class Users extends MY_Controller
         );
         $this->data['terminals'] = $this->general->get_data_with_param($get_terminal);
         $this->data['title'] = "Metropoint";
-        $this->load->view('admin/users/add', $this->data);
+        $this->load->view('operator/users/add', $this->data);
     }
 
     public function edit($id=null){
@@ -67,7 +66,7 @@ class Users extends MY_Controller
                 unset($input['password']);
             }
             if($this->general->update_($input,$id ,'mp_users')){
-                redirect(base_url("admin/users/"));
+                redirect(base_url("operator/users/"));
             }
         }
         $get_login_user = array(
@@ -86,7 +85,7 @@ class Users extends MY_Controller
         $this->data['terminals'] = $this->general->get_data_with_param($get_terminal);
 
         $this->data['title'] = "Metropoint - Terminal";
-        $this->load->view('admin/users/edit', $this->data);
+        $this->load->view('operator/users/edit', $this->data);
     }
 
     public function delete_user() {

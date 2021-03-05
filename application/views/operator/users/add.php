@@ -27,8 +27,8 @@ $this->load->view('layout/topbar');
                                 <label class="col-md-2 control-label">User Type</label>
                                 <div class="col-md-10">
                                     <select name="user_type" class="form-control" data-style="btn-white">
-                                        <option value="2">Operator</option>
-                                        <option value="3">Dispatcher</option>
+                                        <option value="4">Driver</option>
+                                        <option value="5">Conductor</option>
                                     </select>
                                 </div>
                             </div>

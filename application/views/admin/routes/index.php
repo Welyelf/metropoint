@@ -1,7 +1,7 @@
 
 <?php
     $this->load->view('layout/head');
-    $this->load->view('layout/topbar');
+    $this->load->view('layout/topbar_admin');
     //$this->load->view('layout/leftbar');
 ?>
 <link href="<?= base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-sm-12 text-xs-center">
                         <div class="form-group">
-                            <a href="<?= base_url('superadmin/routes/add') ?>" id="demo-btn-addrow" class="btn btn-default m-b-20"><i class="fa fa-plus m-r-5"></i> Add New Route</a>
+                            <a href="<?= base_url('admin/routes/add') ?>" id="demo-btn-addrow" class="btn btn-default m-b-20"><i class="fa fa-plus m-r-5"></i> Add New Route</a>
                         </div>
                     </div>
                     <table id="datatable" class="table table-striped table-bordered table-responsive">
@@ -45,7 +45,7 @@
                                 <td><?= $route->start_time; ?></td>
                                 <td><?= $route->end_time; ?></td>
                                 <td>
-                                    <a href="<?= base_url('superadmin/routes/edit/'.$route->id);  ?>" id="demo-btn-addrow" class="btn btn-primary m-b-20">
+                                    <a href="<?= base_url('admin/routes/edit/'.$route->id);  ?>" id="demo-btn-addrow" class="btn btn-primary m-b-20">
                                         <i class="fa fa-pencil m-r-5"></i> Edit
                                     </a>
                                     <a id="<?= $route->id  ?>" class="btn btn-primary m-b-20 remove_engine">

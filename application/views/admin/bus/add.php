@@ -15,117 +15,91 @@ $this->load->view('layout/topbar');
             <!-- Page-Title -->
             <div class="row">
                 <div class="col-sm-12">
-                    <h4 class="page-title">Users</h4>
-                    <p class="text-muted page-title-alt">Add or Edit the user information!</p>
+                    <h4 class="page-title">Add Bus</h4>
+                    <p class="text-muted page-title-alt">Add bus information!</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 text-xs-center">
                     <div class="col-md-12">
-                        <form class="form-horizontal" role="form">
+                        <form class="form-horizontal" role="form" method="post">
                             <div class="form-group">
-                                <label class="col-md-2 control-label">User Type</label>
+                                <label class="col-md-2 control-label">Driver</label>
                                 <div class="col-md-10">
-                                    <select name="user_type" class="form-control" data-style="btn-white">
+                                    <select name="assigned_driver" class="form-control" data-style="btn-white">
+                                        <option value="0">Select Driver</option>
                                         <option value="1">Admin</option>
-                                        <option value="4">Conductor</option>
-                                        <option value="5">Driver</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2 control-label" for="example-email">Base Terminal</label>
+                                <label class="col-md-2 control-label">Conductor</label>
                                 <div class="col-md-10">
-                                    <select id="base_termnial" name="base_termnial" class="form-control" data-style="btn-white">
-                                        <option value="1">Davao</option>
-                                        <option value="2">Tagum</option>
+                                    <select name="assigned_conductor" class="form-control" data-style="btn-white">
+                                        <option value="0">Select Conductor</option>
+                                        <option value="1">Admin</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2 control-label" for="example-email">Username</label>
+                                <label class="col-md-2 control-label" for="example-email">Bus Number</label>
                                 <div class="col-md-10">
-                                    <input type="text" id="username" name="username" class="form-control" required>
+                                    <input type="text" id="bus_number" name="bus_number" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2 control-label" for="example-email">Password</label>
+                                <label class="col-md-2 control-label" for="example-email">Plate Number</label>
                                 <div class="col-md-10">
-                                    <input type="password" id="password" name="password" class="form-control" required>
+                                    <input type="text" id="plate_number" name="plate_number" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2 control-label" for="example-email">Firstname</label>
+                                <label class="col-md-2 control-label">Bus Type</label>
                                 <div class="col-md-10">
-                                    <input type="text" id="firstname" name="firstname" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label" for="example-email">Lastname</label>
-                                <div class="col-md-10">
-                                    <input type="text" id="lastname" name="lastname" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label" for="example-email">Middile Initial</label>
-                                <div class="col-md-10">
-                                    <input type="text" id="mi" name="mi" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label" for="example-email">Suffix</label>
-                                <div class="col-md-10">
-                                    <input type="text" id="suffix" name="suffix" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">Sex</label>
-                                <div class="col-md-10">
-                                    <select class="form-control" data-style="btn-white">
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                    <select name="bus_type_id" class="form-control" data-style="btn-white" required>
+                                        <?php foreach ($bus_types as $bus_type): ?>
+                                            <option value="<?= $bus_type->id; ?>"><?= $bus_type->name; ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2 control-label" for="example-email">Contact Number</label>
+                                <label class="col-md-2 control-label">Engine Type</label>
                                 <div class="col-md-10">
-                                    <input type="text" id="contact_no" name="contact_no" class="form-control">
+                                    <select name="engine_type_id" class="form-control" data-style="btn-white">
+                                        <?php foreach ($engine_types as $engine_type): ?>
+                                            <option value="<?= $engine_type->id; ?>"><?= $engine_type->name; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="example-email">Sap Code</label>
+                                <div class="col-md-10">
+                                    <input type="text" id="sap_code" name="sap_code" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="example-email">Seat Capacity</label>
+                                <div class="col-md-10">
+                                    <input type="number" id="seat_capacity" name="seat_capacity" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">Status</label>
                                 <div class="col-md-10">
-                                    <select name="status" class="form-control" data-style="btn-white">
-                                        <option value="0">Regular</option>
-                                        <option value="1">Casual</option>
-                                        <option value="2">Termindated</option>
-                                        <option value="3">Suspended</option>
+                                    <select name="status" class="form-control" data-style="btn-white" required>
+                                        <option value="0">Active</option>
+                                        <option value="1">InActive</option>
+                                        <option value="2">OnShop</option>
+                                        <option value="3">Rental</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label" for="example-email">Employment Date</label>
-                                <div class="col-md-10">
-                                    <input type="text" id="employment_date" name="employment_date" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label" for="example-email">Driver License</label>
-                                <div class="col-md-10">
-                                    <input type="text" id="driver_license" name="driver_license" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label" for="example-email">License Experience Date</label>
-                                <div class="col-md-10">
-                                    <input type="text" id="license_exp_date" name="license_exp_date" class="form-control">
                                 </div>
                             </div>
                             <div class="modal-footer modal-footer-detail">
                                 <div class="button-modal-list">
-                                    <button id="demo-btn-addrow" class="btn btn-danger m-b-20 text-right"><i class="fa fa-remove m-r-5"></i> Cancel</button>
-                                    <button id="demo-btn-addrow" class="btn btn-default m-b-20 text-right"><i class="fa fa-paper-plane-o m-r-5"></i> Save</button>
+                                    <a href="<?= base_url('admin/bus/') ?>" class="btn btn-danger m-b-20 text-right"><i class="fa fa-remove m-r-5"></i> Cancel</a>
+                                    <button type="submit" class="btn btn-default m-b-20 text-right"><i class="fa fa-paper-plane-o m-r-5"></i> Save</button>
                                 </div>
                             </div>
 

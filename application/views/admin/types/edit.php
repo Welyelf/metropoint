@@ -1,7 +1,7 @@
 
 <?php
 $this->load->view('layout/head');
-$this->load->view('layout/topbar');
+$this->load->view('layout/topbar_admin');
 //$this->load->view('layout/leftbar');
 ?>
 <!-- ============================================================== -->
@@ -37,7 +37,7 @@ $this->load->view('layout/topbar');
                             </div>
                             <div class="modal-footer modal-footer-detail">
                                 <div class="button-modal-list">
-                                    <a href="<?= base_url('superadmin/types/') ?>" id="demo-btn-addrow" class="btn btn-danger m-b-20 text-right"><i class="fa fa-remove m-r-5"></i> Cancel</a>
+                                    <a href="<?= base_url('admin/types/') ?>" id="demo-btn-addrow" class="btn btn-danger m-b-20 text-right"><i class="fa fa-remove m-r-5"></i> Cancel</a>
                                     <button type="submit" class="btn btn-default m-b-20 text-right"><i class="fa fa-paper-plane-o m-r-5"></i> Save</button>
                                 </div>
                             </div>

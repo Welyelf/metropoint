@@ -24,7 +24,7 @@ class Routes extends MY_Controller
             ),
         );
         $this->data['routes'] = $this->general->get_data_with_param($get_routes);
-        $this->load->view('superadmin/routes/index', $this->data);
+        $this->load->view('admin/routes/index', $this->data);
     }
 
     public function add(){
@@ -34,18 +34,18 @@ class Routes extends MY_Controller
             unset($input['minute']);
             unset($input['meridian']);
             if($this->general->add_($input, 'mp_routes')){
-                redirect(base_url("superadmin/routes/"));
+                redirect(base_url("admin/routes/"));
             }
         }
         $this->data['title'] = "Metropoint - Routes";
-        $this->load->view('superadmin/routes/add', $this->data);
+        $this->load->view('admin/routes/add', $this->data);
     }
 
     public function edit($id=null){
         $input = $this->input->post();
         if ($input) {
             if($this->general->update_($input,$id ,'mp_routes')){
-                redirect(base_url("superadmin/routes/"));
+                redirect(base_url("admin/routes/"));
             }
         }
         $get_login_user = array(
@@ -57,7 +57,7 @@ class Routes extends MY_Controller
         );
         $this->data['route_details'] = $this->general->get_data_with_param($get_login_user,FALSE);
         $this->data['title'] = "Metropoint - Routes";
-        $this->load->view('superadmin/routes/edit', $this->data);
+        $this->load->view('admin/routes/edit', $this->data);
     }
 
     public function delete_route() {
