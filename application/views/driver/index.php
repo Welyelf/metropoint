@@ -68,7 +68,7 @@ $this->load->view('layout/topbar_driver');
             accessToken: 'your.mapbox.access.token'
         }).addTo(mymap);
 
-        var marker = L.marker([7.353216, 125.702407]).addTo(mymap);
+        //var marker = L.marker([7.353216, 125.702407]).addTo(mymap);
 
         var current_position, current_accuracy;
 
@@ -97,6 +97,7 @@ $this->load->view('layout/topbar_driver');
             mymap.locate({setView: true, maxZoom: 16});
         }
         locate();
+        setInterval(locate, 50000);
     });
 </script>
 
