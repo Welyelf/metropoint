@@ -69,6 +69,49 @@ class General_model extends CI_Model {
         }
     }
 
+    public function get_row_count($params = array())
+    {
+        if(array_key_exists("where", $params)){
+            foreach($params['where'] as $key => $val){
+                $this->db->where($key, $val);
+            }
+        }
+
+        if(array_key_exists("table",$params) && $params['table'] != NULL ){
+            $this->db->from($params['table']);
+        }else{
+            return FALSE;
+        }
+
+        $query = $this->db->count_all_results();
+        return $query;
+    }
+
+    public function get_user_operator_dispatcher($terminalId=null)
+    {
+        $this->db->from('mp_users');
+        $this->db->select('*,mp_users.id as user_id');
+        $this->db->join('mp_terminals', 'mp_users.base_terminal = mp_terminals.id','left');
+        $this->db->where("(mp_users.user_type=2 OR mp_users.user_type=3) AND mp_users.base_terminal=".$terminalId, NULL, FALSE);
+        //$this->db->where("mp_users.base_terminal", $terminalId);
+        $this->db->order_by('mp_users.id', "DESC");
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function get_user_driver_conductor($terminalId=null)
+    {
+        $this->db->from('mp_users');
+        $this->db->select('*,mp_users.id as user_id');
+        $this->db->join('mp_terminals', 'mp_terminals.id = mp_users.base_terminal','left');
+        $this->db->where("(mp_users.user_type=4 OR mp_users.user_type=5)", NULL, FALSE);
+        //$this->db->where("mp_users.base_terminal", $terminalId);
+        //$this->db->where("mp_users.base_terminal", $terminalId);
+        $this->db->order_by('mp_users.id', "DESC");
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function delete_($params = array()) {
         if(array_key_exists("where", $params)){
             foreach($params['where'] as $key => $val){

@@ -16,22 +16,7 @@ class Users extends MY_Controller
         $base_terminal_id = $_SESSION['user']->base_terminal;
         $this->data['title'] = "Metropoint - Users";
         // get all job tags
-        $get_users = array(
-            'where' => array(
-                'user_type' => 4,
-            ),
-            'or_where' => array(
-                'user_type' => 5,
-            ),
-            'table' => 'mp_users',
-            'select' => '*,mp_users.id as user_id',
-            'join' => array(
-                'table' => 'mp_terminals',
-                'statement' => 'mp_users.base_terminal=mp_terminals.id',
-                'join_as' => 'left',
-            ),
-        );
-        $this->data['users'] = $this->general->get_data_with_param($get_users);
+        $this->data['users'] = $this->general->get_user_driver_conductor($base_terminal_id);
         $this->load->view('operator/users/index', $this->data);
     }
 

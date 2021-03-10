@@ -73,7 +73,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#datatable').dataTable({
-
+            'order' : []
         });
         $(".remove_user").on( "click", function( event ) {
             var ID=this.id;

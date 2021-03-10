@@ -20,11 +20,6 @@ function employment_status($index=0){
 
 function user_types($index=0){
     $types = array('SuperAdmin','Admin','Operator','Dispatcher','Driver','Conductor');
-    if($index<0 || $index>=count($types)){
-        $index=0;
-    }else if(!is_int($index)){
-        $index=0;
-    }
     return $types[$index];
 }
 
@@ -38,6 +33,11 @@ function bus_status($index=0){
     return $types[$index];
 }
 
+function trip_status($index=0){
+    $trip_stat = array('Waiting','On Torno','On Road','Arrived');
+    return $trip_stat[$index];
+}
+
 if (!function_exists('get_user_data')){
     function get_user_data($id=null){
         $CI = &get_instance();
@@ -49,7 +49,6 @@ if (!function_exists('get_user_data')){
             'table' => 'mp_users',
             'select' => 'id,firstname,lastname',
         );
-        //$this->page_data['employees'] = $this->general->get_data_with_param($get_employee);
         return $CI->general->get_data_with_param($get_employee,FALSE);
     }
 }

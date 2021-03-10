@@ -23,6 +23,10 @@ class Users extends MY_Controller
                 'statement' => 'mp_users.base_terminal=mp_terminals.id',
                 'join_as' => 'left',
             ),
+            'order' => array(
+                'order_by' => 'mp_users.id',
+                'ordering' => 'DESC',
+            ),
         );
         $this->data['users'] = $this->general->get_data_with_param($get_users);
         $this->load->view('superadmin/users/index', $this->data);

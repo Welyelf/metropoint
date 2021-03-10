@@ -35,16 +35,16 @@ class Auth extends CI_Controller {
                 if ($this->bcrypt->check_password($input['password'], $user->password)) { //if ($input['password']== $user->password)
                     $this->session->set_userdata('user', $user);
                     if ($user->user_type == 0) {
-                        redirect(base_url('superadmin/dashboard'));
+                        redirect(base_url('superadmin/users'));
                     } else if ($user->user_type == 1)  {
                         redirect(base_url('admin/users'));
                     } else if ($user->user_type == 2) {
                         redirect(base_url('operator/users'));
                     }else if ($user->user_type == 3) {
-                        redirect(base_url('superadmin/dashboard'));
+                        redirect(base_url('dispatcher/dashboard'));
                     }else if ($user->user_type == 4 || $user->user_type == 5) {
-                        redirect(base_url('superadmin/dashboard'));
-                    }else{
+                        redirect(base_url('driver/dashboard'));
+                    }else {
                         $this->data['error'] = "User doesn't have a role.";
                     }
                     exit;
