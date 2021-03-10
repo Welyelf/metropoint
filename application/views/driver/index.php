@@ -70,6 +70,8 @@ $this->load->view('layout/topbar_driver');
 
         var marker = L.marker([7.353216, 125.702407]).addTo(mymap);
 
+        var current_position, current_accuracy;
+
         function onLocationFound(e) {
             // if position defined, then remove the existing position marker and accuracy circle from the map
             if (current_position) {
@@ -77,7 +79,7 @@ $this->load->view('layout/topbar_driver');
                 mymap.removeLayer(current_accuracy);
             }
             console.log(e);
-            var currentpos = L.marker([e.latlng.lng,e.latlng.lat]).addTo(mymap);
+            //var currentpos = L.marker([e.latlng.lng,e.latlng.lat]).addTo(mymap);
 
             var radius = e.accuracy / 2;
             current_position = L.marker(e.latlng).addTo(mymap)
