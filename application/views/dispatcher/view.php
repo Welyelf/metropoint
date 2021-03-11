@@ -22,7 +22,7 @@ $this->load->view('layout/topbar_dispatcher');
                             if($this->uri->segment(4) == 0){
                                 echo 'Bus Waiting on Queue.';
                             }else if($this->uri->segment(4) == 1){
-                                echo 'Buses that are ready for Departure.';
+                                echo 'Buses that are incoming to this terminal.';
                             }else if($this->uri->segment(4) == 2){
                                 echo 'On Road Buses.';
                             }
@@ -70,12 +70,12 @@ $this->load->view('layout/topbar_dispatcher');
                                                 <center>
                                                     <?php if($trip->trip_status == 0) :  ?>
                                                         <a id="<?=$trip->trip_id;?>" class="btn btn-default btn-sm m-b-20 on_torno">
-                                                            <i class="md md-filter-list m-r-5"></i> Torno
+                                                            <i class="md md-filter-list m-r-5"></i> Depart
                                                         </a>
                                                     <?php endif; ?>
                                                     <?php if($trip->trip_status == 1) :  ?>
                                                         <a id="<?=$trip->trip_id;?>" class="btn btn-default btn-sm m-b-20 on_road">
-                                                            <i class="md  md-directions-bus m-r-5"></i> Departed
+                                                            <i class="md  md-directions-bus m-r-5"></i> Arrived
                                                         </a>
                                                     <?php endif; ?>
                                                 </center>
@@ -125,7 +125,7 @@ $this->load->view('layout/topbar_dispatcher');
             var ID=this.id;
             // alert(ID);
             Swal.fire({
-                title: 'Make this trip On Torno?',
+                title: 'Depart this Bus?',
                 text: "",
                 icon: 'warning',
                 showCancelButton: true,
@@ -156,7 +156,7 @@ $this->load->view('layout/topbar_dispatcher');
             var ID=this.id;
             // alert(ID);
             Swal.fire({
-                title: 'Continue bus departure?',
+                title: 'Bus has been arrived?',
                 text: "",
                 icon: 'warning',
                 showCancelButton: true,
@@ -169,7 +169,7 @@ $this->load->view('layout/topbar_dispatcher');
                     $.ajax({
                         type: "POST",
                         url: "<?= base_url() ?>dispatcher/dashboard/change_status",
-                        data: {id : ID , status : 2}, // serializes the form's elements.
+                        data: {id : ID , status : 3}, // serializes the form's elements.
                         success: function(data)
                         {
                             if(data === "1"){

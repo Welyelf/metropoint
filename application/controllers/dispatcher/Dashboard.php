@@ -15,7 +15,6 @@ class Dashboard extends MY_Controller
     public function index()
     {
         $base_terminal_id = $_SESSION['user']->base_terminal;
-
         $get_terminal = array(
             'where' => array(
                 'id' => $base_terminal_id,
@@ -24,10 +23,9 @@ class Dashboard extends MY_Controller
             'select' => '*',
         );
         $terminal = $this->general->get_data_with_param($get_terminal,FALSE);
-        //echo $terminal->name;
+        $this->data['terminal_data'] = $terminal;
 
         $this->data['title'] = "Metropoint - Users";
-
         $get_waiting_count = array(
             'where' => array(
                 'status' => 0,
@@ -48,8 +46,8 @@ class Dashboard extends MY_Controller
 
         $get_road_count = array(
             'where' => array(
-                'status' => 2,
-                'trip_terminal_id' => $base_terminal_id,
+                'status' => 1,
+                'trip_to' => $terminal->name,
             ),
             'table' => 'mp_trips',
         );
@@ -66,13 +64,12 @@ class Dashboard extends MY_Controller
 
         $get_incoming = array(
             'where' => array(
-                'status' => 2,
-               'trip_to' => $terminal->name,
+                'status' => 3,
+                'trip_to' => $terminal->name,
             ),
             'table' => 'mp_trips',
         );
         $this->data['incoming'] = $this->general->get_row_count($get_incoming);
-
 
         $get_trips = array(
             'where' => array(
@@ -91,7 +88,6 @@ class Dashboard extends MY_Controller
             ),
         );
         $this->data['trips'] = $this->general->get_data_with_param($get_trips);
-
 
         $this->load->view('dispatcher/index', $this->data);
     }

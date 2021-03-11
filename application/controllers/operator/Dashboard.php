@@ -71,38 +71,23 @@ class Dashboard extends MY_Controller
         );
         $this->data['buses'] = $this->general->get_row_count($get_bus_count);
 
-        $get_bus_active = array(
-            'where' => array(
-                'status' => 0,
-            ),
-            'table' => 'mp_bus',
-        );
-        $this->data['bus_active'] = $this->general->get_row_count($get_bus_active);
-
-        $get_bus_inactive = array(
-            'where' => array(
-                'status' => 1,
-            ),
-            'table' => 'mp_bus',
-        );
-        $this->data['bus_inactive'] = $this->general->get_row_count($get_bus_inactive);
-
-        $get_bus_onshop = array(
+        $get_bus_onroad = array(
             'where' => array(
                 'status' => 2,
+                'trip_to' => $terminal->name,
             ),
-            'table' => 'mp_bus',
+            'table' => 'mp_trips',
         );
-        $this->data['bus_onshop'] = $this->general->get_row_count($get_bus_onshop);
+        $this->data['bus_onroad'] = $this->general->get_row_count($get_bus_onroad);
 
-        $get_bus_orental = array(
+        $get_bus_torno = array(
             'where' => array(
-                'status' => 3,
+                'status' => 0,
+                'trip_terminal_id' => $base_terminal_id,
             ),
-            'table' => 'mp_bus',
+            'table' => 'mp_trips',
         );
-        $this->data['bus_rental'] = $this->general->get_row_count($get_bus_orental);
-
+        $this->data['bus_torno'] = $this->general->get_row_count($get_bus_torno);
 
         $get_bus_driver = array(
             'where' => array(
@@ -121,6 +106,6 @@ class Dashboard extends MY_Controller
         $this->data['bus_no_conductor'] = $this->general->get_row_count($get_bus_conductor);
 
 
-        $this->load->view('admin/dashboard/index', $this->data);
+        $this->load->view('operator/dashboard/index', $this->data);
     }
 }

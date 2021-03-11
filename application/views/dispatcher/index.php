@@ -38,7 +38,7 @@
                             </div>
                         </a>
 
-                        <a href="<?= base_url(); ?>dispatcher/dashboard/view/1">
+                        <a href="#">
                             <div class="col-md-6 col-lg-3">
                                 <div class="widget-bg-color-icon card-box">
                                     <div class="bg-icon bg-icon-pink pull-left">
@@ -46,14 +46,14 @@
                                     </div>
                                     <div class="text-right">
                                         <h3 class="text-dark"><b class="counter"><?= $torno; ?></b></h3>
-                                        <p class="text-muted">On Torno</p>
+                                        <p class="text-muted">Departed</p>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
                         </a>
 
-                        <a href="<?= base_url(); ?>dispatcher/dashboard/view/2">
+                        <a href="<?= base_url(); ?>dispatcher/dashboard/view/1">
                         <div class="col-md-6 col-lg-3">
                             <div class="widget-bg-color-icon card-box">
                                 <div class="bg-icon bg-icon-purple pull-left">
@@ -81,7 +81,7 @@
                             </div>
                         </div>-->
 
-                        <a href="<?= base_url(); ?>dispatcher/dashboard/incoming">
+                        <a href="<?= base_url(); ?>dispatcher/dashboard/view/3">
                             <div class="col-md-6 col-lg-3">
                                 <div class="widget-bg-color-icon card-box">
                                     <div class="bg-icon bg-icon-success pull-left">
@@ -89,7 +89,7 @@
                                     </div>
                                     <div class="text-right">
                                         <h3 class="text-dark"><b class="counter"><?= $incoming; ?></b></h3>
-                                        <p class="text-muted">Incoming</p>
+                                        <p class="text-muted">Arrived</p>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
