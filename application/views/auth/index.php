@@ -45,7 +45,7 @@
         }
         ?>
         <div class="panel-heading">
-            <center><img src="<?= base_url(); ?>assets/images/bus.png" width="70" alt="user-img" class="img-responsive"></center>
+            <center><img src="<?= base_url(); ?>assets/images/dms.png" width="170" alt="user-img" class="img-responsive"></center>
             <h3 class="text-center"> Sign In to <strong class="text-default">MetroPoint</strong> </h3>
         </div>
 
