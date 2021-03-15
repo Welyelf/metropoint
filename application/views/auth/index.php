@@ -45,11 +45,11 @@
         }
         ?>
         <div class="panel-heading">
-            <center><img src="<?= base_url(); ?>assets/images/dms.png" width="120" alt="user-img" class="img-responsive"></center>
-            <h3 class="text-center"> Sign In to <strong class="text-default">MetroPoint</strong> </h3>
+            <center><img src="<?= base_url(); ?>assets/images/dms.png" width="100" alt="user-img" class="img-responsive"></center>
+            <h4 class="text-center"> Sign In to <strong class="text-default">MetroPoint</strong> </h4>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal m-t-20" method="post">
+            <form class="form-horizontal m-t-1" method="post">
                 <div class="form-group ">
                     <div class="col-xs-12">
                         <input class="form-control" name="username" type="text" required="" placeholder="Username">
