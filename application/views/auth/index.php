@@ -45,14 +45,11 @@
         }
         ?>
         <div class="panel-heading">
-            <center><img src="<?= base_url(); ?>assets/images/dms.png" width="170" alt="user-img" class="img-responsive"></center>
+            <center><img src="<?= base_url(); ?>assets/images/dms.png" width="120" alt="user-img" class="img-responsive"></center>
             <h3 class="text-center"> Sign In to <strong class="text-default">MetroPoint</strong> </h3>
         </div>
-
-
         <div class="panel-body">
             <form class="form-horizontal m-t-20" method="post">
-
                 <div class="form-group ">
                     <div class="col-xs-12">
                         <input class="form-control" name="username" type="text" required="" placeholder="Username">
@@ -63,7 +60,6 @@
                         <input class="form-control" name="password" type="password" required="" placeholder="Password">
                     </div>
                 </div>
-
                 <div class="form-group text-center m-t-40">
                     <div class="col-xs-12">
                         <button class="btn btn-inverse btn-block text-uppercase waves-effect waves-light" type="submit">Log In</button>

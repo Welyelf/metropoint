@@ -78,7 +78,7 @@ $this->load->view('layout/topbar_driver');
                 mymap.removeLayer(current_position);
                 mymap.removeLayer(current_accuracy);
             }
-            console.log(e);
+            // console.log(e);
             //var currentpos = L.marker([e.latlng.lng,e.latlng.lat]).addTo(mymap);
 
             var radius = e.accuracy / 2;
@@ -86,7 +86,7 @@ $this->load->view('layout/topbar_driver');
             //.bindPopup("You are within " + radius + " meters from this point").openPopup();
                 .bindPopup("Your Location").openPopup();
             current_accuracy = L.circle(e.latlng, radius).addTo(mymap);
-            console.log(e.latlng);
+             console.log(e.latlng);
         }
         function onLocationError(e) {
             console.log(e.message);

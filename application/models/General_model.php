@@ -125,6 +125,19 @@ class General_model extends CI_Model {
         return $query->result();
     }
 
+    public function get_trips_by_driver_or_conductor($terminalId=null)
+    {
+        $this->db->from('mp_trips');
+        $this->db->select('*,mp_trips.id as trip_id,mp_trips.status as trip_status');
+        $this->db->join('mp_bus', 'mp_bus.id=mp_trips.trip_bus_id','left');
+        $this->db->where("(mp_trips.status=0 OR mp_trips.status=1)", NULL, FALSE);
+        //$this->db->where("mp_users.base_terminal", $terminalId);
+        //$this->db->where("mp_users.base_terminal", $terminalId);
+        $this->db->order_by('mp_users.id', "DESC");
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function delete_($params = array()) {
         if(array_key_exists("where", $params)){
             foreach($params['where'] as $key => $val){
