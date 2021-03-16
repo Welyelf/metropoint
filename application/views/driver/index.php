@@ -89,12 +89,10 @@ $this->load->view('layout/topbar_driver');
             $.ajax({
                 type: "POST",
                 url: "/driver/dashboard/update_trip_coordinates",
-                data: {id : <?= $trip->id; ?>,lat : e.latlng.lat, long : e.latlng.lng}, // serializes the form's elements.
+                data: {id : <?= $trip->trip_id; ?>,lat : e.latlng.lat, long : e.latlng.lng}, // serializes the form's elements.
                 success: function(data)
                 {
-                    var template_data = JSON.parse(data);
-                    $('#summernote').summernote('code', template_data.content);
-                    //console.log(data);
+                    console.log(data);
                 }
             });
         }
