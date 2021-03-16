@@ -88,7 +88,7 @@ $this->load->view('layout/topbar_driver');
              console.log(e.latlng);
             $.ajax({
                 type: "POST",
-                url: "<?= base_url() ?>/driver/dashboard/update_trip_coordinates",
+                url: "/driver/dashboard/update_trip_coordinates",
                 data: {id : <?= $trip->id; ?>,lat : e.latlng.lat, long : e.latlng.lng}, // serializes the form's elements.
                 success: function(data)
                 {
