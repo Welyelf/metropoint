@@ -15,7 +15,7 @@ class Dashboard extends MY_Controller
     public function index()
     {
         $base_terminal_id = $_SESSION['user']->base_terminal;
-
+        $id = $_SESSION['user']->id;
         $get_terminal = array(
             'where' => array(
                 'id' => $base_terminal_id,
@@ -24,177 +24,24 @@ class Dashboard extends MY_Controller
             'select' => '*',
         );
         $terminal = $this->general->get_data_with_param($get_terminal,FALSE);
-        //echo $terminal->name;
-
         $this->data['title'] = "Metropoint - Users";
 
-        $get_waiting_count = array(
-            'where' => array(
-                'status' => 0,
-                'trip_terminal_id' => $base_terminal_id,
-            ),
-            'table' => 'mp_trips',
-        );
-        $this->data['waiting'] = $this->general->get_row_count($get_waiting_count);
-
-        $get_torno_count = array(
-            'where' => array(
-                'status' => 1,
-                'trip_terminal_id' => $base_terminal_id,
-            ),
-            'table' => 'mp_trips',
-        );
-        $this->data['torno'] = $this->general->get_row_count($get_torno_count);
-
-        $get_road_count = array(
-            'where' => array(
-                'status' => 2,
-                'trip_terminal_id' => $base_terminal_id,
-            ),
-            'table' => 'mp_trips',
-        );
-        $this->data['on_road'] = $this->general->get_row_count($get_road_count);
-
-        $get_arrived_count = array(
-            'where' => array(
-                'status' => 3,
-                'trip_terminal_id' => $base_terminal_id,
-            ),
-            'table' => 'mp_trips',
-        );
-        $this->data['arrived'] = $this->general->get_row_count($get_arrived_count);
-
-        $get_incoming = array(
-            'where' => array(
-                'status' => 2,
-               'trip_to' => $terminal->name,
-            ),
-            'table' => 'mp_trips',
-        );
-        $this->data['incoming'] = $this->general->get_row_count($get_incoming);
-
-
-        $get_trips = array(
-            'where' => array(
-                'trip_terminal_id' => $base_terminal_id,
-            ),
-            'table' => 'mp_trips',
-            'select' => '*,mp_trips.id as trip_id,mp_trips.status as trip_status',
-            'join' => array(
-                'table' => 'mp_bus',
-                'statement' => 'mp_bus.id=mp_trips.trip_bus_id',
-                'join_as' => 'left',
-            ),
-            'order' => array(
-                'order_by' => 'mp_trips.id',
-                'ordering' => 'DESC',
-            ),
-        );
-        $this->data['trips'] = $this->general->get_data_with_param($get_trips);
-
-
+        $this->data['trip'] = $this->general->get_trips_by_driver_or_conductor($id);
+        //print_r($this->data['trip']);
         $this->load->view('driver/index', $this->data);
     }
 
-    public function view($status=null)
+    public function update_trip_coordinates()
     {
-        if($status == null){
-            redirect(base_url('dispatcher/dashboard/'));
-        }
-        $base_terminal_id = $_SESSION['user']->base_terminal;
-
-        $get_terminal = array(
-            'where' => array(
-                'id' => $base_terminal_id,
-            ),
-            'table' => 'mp_terminals',
-            'select' => '*',
-        );
-        $terminal = $this->general->get_data_with_param($get_terminal,FALSE);
-        //echo $terminal->name;
-
-        $this->data['title'] = "Metropoint - Users";
-
-        $get_trips = array(
-            'where' => array(
-                'mp_trips.status' => $status,
-                //'trip_to' => $terminal->name,
-            ),
-            'table' => 'mp_trips',
-            'select' => '*,mp_trips.id as trip_id,mp_trips.status as trip_status',
-            'join' => array(
-                'table' => 'mp_bus',
-                'statement' => 'mp_bus.id=mp_trips.trip_bus_id',
-                'join_as' => 'left',
-            ),
-            'order' => array(
-                'order_by' => 'mp_trips.id',
-                'ordering' => 'DESC',
-            ),
-        );
-        $this->data['trips'] = $this->general->get_data_with_param($get_trips);
-        $this->load->view('dispatcher/view', $this->data);
-    }
-
-    public function incoming()
-    {
-        $base_terminal_id = $_SESSION['user']->base_terminal;
-
-        $get_terminal = array(
-            'where' => array(
-                'id' => $base_terminal_id,
-            ),
-            'table' => 'mp_terminals',
-            'select' => '*',
-        );
-        $terminal = $this->general->get_data_with_param($get_terminal,FALSE);
-        //echo $terminal->name;
-
-        $this->data['title'] = "Metropoint - Users";
-
-        $get_trips = array(
-            'where' => array(
-                'mp_trips.status' => 2,
-                'trip_to' => $terminal->name,
-            ),
-            'table' => 'mp_trips',
-            'select' => '*,mp_trips.id as trip_id,mp_trips.status as trip_status',
-            'join' => array(
-                'table' => 'mp_bus',
-                'statement' => 'mp_bus.id=mp_trips.trip_bus_id',
-                'join_as' => 'left',
-            ),
-            'order' => array(
-                'order_by' => 'mp_trips.id',
-                'ordering' => 'DESC',
-            ),
-        );
-        $this->data['trips'] = $this->general->get_data_with_param($get_trips);
-
-
-        $this->load->view('dispatcher/incoming', $this->data);
-    }
-
-
-   public function change_status(){
         $id = $_POST['id'];
-        $bus_status_update = array(
-            'status' => $_POST['status']
-        );
-        if($this->general->update_($bus_status_update,$id,'mp_trips')){
-            echo '1';
-        }
-   }
-
-    public function delete_trip() {
-        $remove_trip = array(
-            'where' => array(
-                'id' => $_POST['id']
-            ),
-            'table' => 'mp_trips'
-        );
-        if($this->general->delete_($remove_trip)){
-            echo '1';
+        $input = array();
+        if ($input) {
+            $input['trip_latitude'] = $_POST['lat'];
+            $input['trip_longitude'] = $_POST['long'];
+            if($this->general->update_($input,$id ,'mp_trips')){
+                echo '1';
+            }
         }
     }
+
 }

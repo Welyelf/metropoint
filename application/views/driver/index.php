@@ -21,12 +21,11 @@ $this->load->view('layout/topbar_driver');
 
             <div class="row">
                 <div class="col-md-12">
-                        <b>AC-303202565656</b><br>
-                        <small>From : <b>Tagum</b></small><br>
-                        <small>To : <b>Davao</b></small><br>
-                    <span class="label label-table label-success">On Road</span>
-                    </div>
-
+                        <b><?= $trip->trip_no; ?></b><br>
+                        <small>From : <b><?= $trip->trip_from; ?></b></small><br>
+                        <small>To : <b><?= $trip->trip_to; ?></b></small><br><br>
+                    <span class="label label-table label-success"><?= trip_status($trip->trip_status); ?></span><br><br>
+                </div>
             </div>
 
             <div class="row">
@@ -87,6 +86,17 @@ $this->load->view('layout/topbar_driver');
                 .bindPopup("Your Location").openPopup();
             current_accuracy = L.circle(e.latlng, radius).addTo(mymap);
              console.log(e.latlng);
+            $.ajax({
+                type: "POST",
+                url: "<?= base_url() ?>/driver/dashboard/update_trip_coordinates",
+                data: {id : <?= $trip->id; ?>,lat : e.latlng.lat, long : e.latlng.lng}, // serializes the form's elements.
+                success: function(data)
+                {
+                    var template_data = JSON.parse(data);
+                    $('#summernote').summernote('code', template_data.content);
+                    //console.log(data);
+                }
+            });
         }
         function onLocationError(e) {
             console.log(e.message);
