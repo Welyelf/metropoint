@@ -40,6 +40,8 @@ class Dashboard extends MY_Controller
             $input['trip_longitude'] = $_POST['long'];
             if($this->general->update_($input,$id ,'mp_trips')){
                 echo '1';
+            }else{
+                echo 'error';
             }
         }
     }
