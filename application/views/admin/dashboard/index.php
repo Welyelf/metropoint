@@ -6,7 +6,7 @@
 ?>
 <link href="<?= base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <style>
-    #mapid { height: 400px; }
+    #mapid { height: 300px; }
     .dashboard_row{
         display: flex !important;
     }
@@ -187,6 +187,15 @@
         <?php $this->load->view('layout/footer'); ?>
     </div>
 
+<style>
+    body{
+        position:fixed !important;
+        top:0 !important;
+        bottom:0 !important;
+        left:0 !important;
+        right:0 !important;
+    }
+</style>
 <?php $this->load->view('layout/foot'); ?>
 <script src="<?= base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/datatables/dataTables.bootstrap.js"></script>
@@ -201,7 +210,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
-        var mymap = L.map('mapid').setView([7.3575577, 125.7035372], 10);
+        var mymap = L.map('mapid').setView([7.3575577, 125.7035372], 8);
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid3JoaXN1bGEiLCJhIjoiY2tqdjAzNjhwMnF1czJxcXVheG5zM2Z0dyJ9.ADUJmb8cso0RObOix5SzOQ', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
@@ -213,33 +222,13 @@
 
         //var marker = L.marker([7.353216, 125.702407]).addTo(mymap);
 
-        var current_position, current_accuracy;
-        function onLocationFound(e) {
-            // if position defined, then remove the existing position marker and accuracy circle from the map
-            if (current_position) {
-                mymap.removeLayer(current_position);
-                mymap.removeLayer(current_accuracy);
-            }
-            console.log(e);
-            //var currentpos = L.marker([e.latlng.lng,e.latlng.lat]).addTo(mymap);
-
-            var radius = e.accuracy / 2;
-            current_position = L.marker(e.latlng).addTo(mymap)
-            //.bindPopup("You are within " + radius + " meters from this point").openPopup();
-                .bindPopup("Your Location").openPopup();
-            current_accuracy = L.circle(e.latlng, radius).addTo(mymap);
-            console.log(e.latlng);
-        }
-        function onLocationError(e) {
-            console.log(e.message);
-        }
-        mymap.on('locationfound', onLocationFound);
-        mymap.on('locationerror', onLocationError);
-        function locate() {
-            mymap.locate({setView: true, maxZoom: 16});
-        }
-        locate();
-        setInterval(locate, 50000);
+        var count=0;
+        <?php foreach ($arrivals as $coordinate) : ?>
+            var name = 'marker'+count;
+            name = L.marker([<?= $coordinate->trip_latitude ?>, <?= $coordinate->trip_longitude ?>]).addTo(mymap);
+            name.bindPopup("<?= '<b>'.$coordinate->bus_number.'</b>' ?>").openPopup();
+            count++;
+        <?php endforeach; ?>
     });
 </script>
 
