@@ -19,6 +19,7 @@ $this->load->view('layout/topbar_driver');
                 </div>
             </div>
 
+            <?php if(isset($trip)): ?>
             <div class="row">
                 <div class="col-md-12">
                         <b><?= $trip->trip_no; ?></b><br>
@@ -35,6 +36,13 @@ $this->load->view('layout/topbar_driver');
                     </div>
                 </div>
             </div>
+            <?php else: ?>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <b>No Trip</b>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div> <!-- container -->
     </div> <!-- content -->
     <?php $this->load->view('layout/footer'); ?>

@@ -34,7 +34,7 @@ function bus_status($index=0){
 }
 
 function trip_status($index=0){
-    $trip_stat = array('Waiting','On Torno','On Road','Arrived');
+    $trip_stat = array('Waiting','On Road','','Arrived');
     return $trip_stat[$index];
 }
 
