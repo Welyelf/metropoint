@@ -1,7 +1,7 @@
 
 <?php
     $this->load->view('layout/head');
-    $this->load->view('layout/topbar_admin');
+    $this->load->view('layout/topbar_operator');
     //$this->load->view('layout/leftbar');
 ?>
 <link href="<?= base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
