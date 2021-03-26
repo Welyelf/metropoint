@@ -127,12 +127,12 @@ class General_model extends CI_Model {
 
     public function get_trips_by_driver_or_conductor($userId=0)
     {
-        $this->db->from('mp_trips');
-        $this->db->select('*,mp_trips.id as trip_id,mp_trips.status as trip_status');
-        $this->db->join('mp_bus', 'mp_bus.id=mp_trips.trip_bus_id','left');
-        $this->db->where("(mp_trips.trip_driver='$userId' OR mp_trips.trip_conductor='$userId')", NULL, FALSE);
+        $this->db->from('que_details');
+        $this->db->select('*,que_details.que_id as trip_id,que_details.que_stat_id as trip_status');
+        //$this->db->join('mp_bus', 'mp_bus.id=mp_trips.trip_bus_id','left');
+        $this->db->where("(que_details.dri_id='$userId' OR que_details.con_id='$userId')", NULL, FALSE);
         //$this->db->where("mp_users.base_terminal", $terminalId);
-        $this->db->where("mp_trips.status !=", 3);
+        $this->db->where("que_details.que_stat_id !=", 4);
         $query = $this->db->get();
         return $query->row();
     }

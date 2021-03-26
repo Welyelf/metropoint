@@ -14,13 +14,17 @@ class Dashboard extends MY_Controller
 
     public function index()
     {
-        $base_terminal_id = $_SESSION['user']->base_terminal;
-        $id = $_SESSION['user']->id;
+        $base_terminal_id = $_SESSION['user']->ter_id;
+        if(isset( $_SESSION['user']->dri_id)){
+            $id = $_SESSION['user']->dri_id;
+        }else{
+            $id = $_SESSION['user']->con_id;
+        }
         $get_terminal = array(
             'where' => array(
-                'id' => $base_terminal_id,
+                'ter_id' => $base_terminal_id,
             ),
-            'table' => 'mp_terminals',
+            'table' => 'ter_details',
             'select' => '*',
         );
         $terminal = $this->general->get_data_with_param($get_terminal,FALSE);

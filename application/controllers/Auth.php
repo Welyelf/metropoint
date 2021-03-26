@@ -22,38 +22,67 @@ class Auth extends CI_Controller {
         $input = $this->input->post();
         if($input){
             //if (array_key_exists('success', $responseKeys)) {
-            $get_login_user = array(
+            $get_dispatcher_user = array(
                 'where' => array(
-                    'username' => $input['username']
+                    'u_name' => $input['username'],
+                    'pass' => md5($input['password']),
                 ),
-                'table' => 'mp_users',
+                'table' => 'user_dispt',
                 'select' => '*',
             );
-            $user = $this->general->get_data_with_param($get_login_user,FALSE);
+            $user = $this->general->get_data_with_param($get_dispatcher_user,FALSE);
+
+            $get_driver_user = array(
+                'where' => array(
+                    'u_name' => $input['username'],
+                    'pass' => md5($input['password']),
+                ),
+                'table' => 'user_dri',
+                'select' => '*',
+            );
+            $get_conductor_user = array(
+                'where' => array(
+                    'u_name' => $input['username'],
+                    'pass' => md5($input['password']),
+                ),
+                'table' => 'user_con',
+                'select' => '*',
+            );
+            $user_driver = $this->general->get_data_with_param($get_driver_user,FALSE);
+            $user_conductor = $this->general->get_data_with_param($get_conductor_user,FALSE);
+
+
+
             //print_r($user);
             if ($user) {
-                if ($this->bcrypt->check_password($input['password'], $user->password)) { //if ($input['password']== $user->password)
-                    $this->session->set_userdata('user', $user);
-                    if ($user->user_type == 0) {
-                        redirect(base_url('superadmin/users'));
-                    } else if ($user->user_type == 1)  {
-                        redirect(base_url('admin/dashboard'));
-                    } else if ($user->user_type == 2) {
-                        redirect(base_url('operator/dashboard'));
-                    }else if ($user->user_type == 3) {
-                        redirect(base_url('dispatcher/dashboard'));
-                    }else if ($user->user_type == 4 || $user->user_type == 5) {
-                        redirect(base_url('driver/dashboard'));
-                    }else {
-                        $this->data['error'] = "User doesn't have a role.";
-                    }
-                    exit;
-                }else {
-                    $this->data['error'] = "Invalid Username and/or Password.";
+                $this->session->set_userdata('user', $user);
+                redirect(base_url('dispatcher/dashboard'));
+//                    if ($user->user_type == 0) {
+//                        redirect(base_url('superadmin/users'));
+//                    } else if ($user->user_type == 1)  {
+//                        redirect(base_url('admin/dashboard'));
+//                    } else if ($user->user_type == 2) {
+//                        redirect(base_url('operator/dashboard'));
+//                    }else if ($user->user_type == 3) {
+//                        redirect(base_url('dispatcher/dashboard'));
+//                    }else if ($user->user_type == 4 || $user->user_type == 5) {
+//                        redirect(base_url('driver/dashboard'));
+//                    }else {
+//                        $this->data['error'] = "User doesn't have a role.";
+//                    }
+
+
+            }else if ( $user_driver || $user_conductor) {
+                if($user_driver){
+                    $this->session->set_userdata('user', $user_driver);
+                }else{
+                    $this->session->set_userdata('user', $user_conductor);
                 }
-            }else {
-                $this->data['error'] = "Email Address don't exist.";
+                redirect(base_url('driver/dashboard'));
+            }else{
+                $this->data['error'] = "Invalid Login.";
             }
+            exit;
         }
         $this->data['title'] = "RewardsVine - Login";
         $this->load->view('auth/index', $this->data);

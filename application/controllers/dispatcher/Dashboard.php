@@ -14,12 +14,12 @@ class Dashboard extends MY_Controller
 
     public function index()
     {
-        $base_terminal_id = $_SESSION['user']->base_terminal;
+        $base_terminal_id = $_SESSION['user']->ter_id;
         $get_terminal = array(
             'where' => array(
-                'id' => $base_terminal_id,
+                'ter_id' => $base_terminal_id,
             ),
-            'table' => 'mp_terminals',
+            'table' => 'ter_details',
             'select' => '*',
         );
         $terminal = $this->general->get_data_with_param($get_terminal,FALSE);
@@ -28,66 +28,66 @@ class Dashboard extends MY_Controller
         $this->data['title'] = "Metropoint - Users";
         $get_waiting_count = array(
             'where' => array(
-                'status' => 0,
-                'trip_terminal_id' => $base_terminal_id,
+                'que_stat_id' => 0,
+                'from_ter' => $terminal->descrip,
             ),
-            'table' => 'mp_trips',
+            'table' => 'que_details',
         );
         $this->data['waiting'] = $this->general->get_row_count($get_waiting_count);
 
         $get_torno_count = array(
             'where' => array(
-                'status' => 1,
-                'trip_terminal_id' => $base_terminal_id,
+                'que_stat_id' => 1,
+                'from_ter' => $terminal->descrip,
             ),
-            'table' => 'mp_trips',
+            'table' => 'que_details',
         );
         $this->data['torno'] = $this->general->get_row_count($get_torno_count);
 
         $get_road_count = array(
             'where' => array(
-                'status' => 1,
-                'trip_to' => $terminal->name,
+                'que_stat_id' => 1,
+                'to_ter' => $terminal->descrip,
             ),
-            'table' => 'mp_trips',
+            'table' => 'que_details',
         );
         $this->data['on_road'] = $this->general->get_row_count($get_road_count);
 
         $get_arrived_count = array(
             'where' => array(
-                'status' => 3,
-                'trip_terminal_id' => $base_terminal_id,
+                'que_stat_id' => 3,
+                'from_ter' => $terminal->descrip,
             ),
-            'table' => 'mp_trips',
+            'table' => 'que_details',
         );
         $this->data['arrived'] = $this->general->get_row_count($get_arrived_count);
 
         $get_incoming = array(
             'where' => array(
-                'status' => 3,
-                'trip_to' => $terminal->name,
+                'que_stat_id' => 3,
+                'to_ter' => $terminal->descrip,
             ),
-            'table' => 'mp_trips',
+            'table' => 'que_details',
         );
         $this->data['incoming'] = $this->general->get_row_count($get_incoming);
 
-        $get_trips = array(
-            'where' => array(
-                'trip_terminal_id' => $base_terminal_id,
-            ),
-            'table' => 'mp_trips',
-            'select' => '*,mp_trips.id as trip_id,mp_trips.status as trip_status',
-            'join' => array(
-                'table' => 'mp_bus',
-                'statement' => 'mp_bus.id=mp_trips.trip_bus_id',
-                'join_as' => 'left',
-            ),
-            'order' => array(
-                'order_by' => 'mp_trips.id',
-                'ordering' => 'DESC',
-            ),
-        );
-        $this->data['trips'] = $this->general->get_data_with_param($get_trips);
+//        $get_trips = array(
+//            'where' => array(
+//                'trip_terminal_id' => $base_terminal_id,
+//            ),
+//            'table' => 'mp_trips',
+//            'select' => '*,mp_trips.id as trip_id,mp_trips.status as trip_status',
+//            'join' => array(
+//                'table' => 'mp_bus',
+//                'statement' => 'mp_bus.id=mp_trips.trip_bus_id',
+//                'join_as' => 'left',
+//            ),
+//            'order' => array(
+//                'order_by' => 'mp_trips.id',
+//                'ordering' => 'DESC',
+//            ),
+//        );
+//        $this->data['trips'] = $this->general->get_data_with_param($get_trips);
 
         $this->load->view('dispatcher/index', $this->data);
     }

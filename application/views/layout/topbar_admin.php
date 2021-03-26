@@ -19,7 +19,7 @@
                         <i class="ion-navicon"></i>
                     </button>
                     <span class="text-white">
-                        <?= strtoupper($_SESSION['user']->username); ?>
+                        <?= strtoupper($_SESSION['user']->u_name); ?>
                     </span>
                 </div>
                 <ul class="nav navbar-nav navbar-right pull-right">

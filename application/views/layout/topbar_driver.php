@@ -17,7 +17,7 @@
                         <i class="ion-navicon"></i>
                     </button>-->
                 </div>
-                <span class="text-white" style="font-size: 14px;text-align: center;padding-top: 20px;position: absolute;"><?= strtoupper($_SESSION['user']->username); ?></span>
+                <span class="text-white" style="font-size: 14px;text-align: center;padding-top: 20px;position: absolute;"><?= strtoupper($_SESSION['user']->u_name); ?></span>
                 <ul class="nav navbar-nav navbar-right pull-right">
                     <li class="hidden-xs">
                         <a href="#" id="btn-fullscreen" class="waves-effect waves-light"><i class="icon-size-fullscreen"></i></a>
