@@ -97,13 +97,13 @@ class Dashboard extends MY_Controller
         if($status == null){
             redirect(base_url('dispatcher/dashboard/'));
         }
-        $base_terminal_id = $_SESSION['user']->base_terminal;
+        $base_terminal_id = $_SESSION['user']->ter_id;
 
         $get_terminal = array(
             'where' => array(
-                'id' => $base_terminal_id,
+                'ter_id' => $base_terminal_id,
             ),
-            'table' => 'mp_terminals',
+            'table' => 'ter_details',
             'select' => '*',
         );
         $terminal = $this->general->get_data_with_param($get_terminal,FALSE);
@@ -113,18 +113,13 @@ class Dashboard extends MY_Controller
 
         $get_trips = array(
             'where' => array(
-                'mp_trips.status' => $status,
-                //'trip_to' => $terminal->name,
+                'que_details.que_stat_id' => $status,
+                'que_details.from_ter' => $terminal->descrip,
             ),
-            'table' => 'mp_trips',
-            'select' => '*,mp_trips.id as trip_id,mp_trips.status as trip_status',
-            'join' => array(
-                'table' => 'mp_bus',
-                'statement' => 'mp_bus.id=mp_trips.trip_bus_id',
-                'join_as' => 'left',
-            ),
+            'table' => 'que_details',
+            'select' => '*,que_details.que_id as trip_id,que_details.que_stat_id as trip_status',
             'order' => array(
-                'order_by' => 'mp_trips.id',
+                'order_by' => 'que_details.que_id',
                 'ordering' => 'DESC',
             ),
         );
@@ -175,9 +170,9 @@ class Dashboard extends MY_Controller
    public function change_status(){
         $id = $_POST['id'];
         $bus_status_update = array(
-            'status' => $_POST['status']
+            'que_stat_id' => $_POST['status']
         );
-        if($this->general->update_($bus_status_update,$id,'mp_trips')){
+        if($this->general->update_que($bus_status_update,$id,'que_details')){
             echo '1';
         }
    }
@@ -187,7 +182,7 @@ class Dashboard extends MY_Controller
             'where' => array(
                 'id' => $_POST['id']
             ),
-            'table' => 'mp_trips'
+            'table' => 'que_details'
         );
         if($this->general->delete_($remove_trip)){
             echo '1';

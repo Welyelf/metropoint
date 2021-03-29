@@ -39,15 +39,44 @@ function trip_status($index=0){
 }
 
 if (!function_exists('get_user_data')){
-    function get_user_data($id=null){
+    function get_user_data($id=null,$table,$fieldname){
         $CI = &get_instance();
         $CI->load->model('General_model', 'general');
         $get_employee = array(
             'where' => array(
-                'id' => $id
+                $fieldname => $id
             ),
-            'table' => 'mp_users',
+            'table' => $table,
             'select' => 'id,firstname,lastname',
+        );
+        return $CI->general->get_data_with_param($get_employee,FALSE);
+    }
+}
+
+if (!function_exists('get_conductor')){
+    function get_conductor($id=null){
+        $CI = &get_instance();
+        $CI->load->model('General_model', 'general');
+        $get_employee = array(
+            'where' => array(
+                'con_id' => $id
+            ),
+            'table' => 'user_con',
+            'select' => 'con_id,f_name,l_name',
+        );
+        return $CI->general->get_data_with_param($get_employee,FALSE);
+    }
+}
+if (!function_exists('get_driver')){
+    function get_driver($id=null){
+        $CI = &get_instance();
+        $CI->load->model('General_model', 'general');
+        $get_employee = array(
+            'where' => array(
+                'dri_id' => $id
+            ),
+            'table' => 'user_dri',
+            'select' => 'dri_id,f_name,l_name',
         );
         return $CI->general->get_data_with_param($get_employee,FALSE);
     }

@@ -160,6 +160,16 @@ class General_model extends CI_Model {
         }
     }
 
+    public function update_que($input, $id,$table)
+    {
+        //$input['date_modified'] = date('Y-m-d H:i:s');;
+        if ($this->db->update($table, $input, array('que_id' => $id))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function update_with_key_field($input, $id,$table,$field)
     {
         //$input['date_modified'] = date('Y-m-d H:i:s');;

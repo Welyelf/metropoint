@@ -44,26 +44,26 @@ $this->load->view('layout/topbar_dispatcher');
                             </thead>
                             <tbody>
                             <?php foreach ($trips as $trip):
-                                $driver_data = get_user_data($trip->trip_driver);
-                                $conductor_data = get_user_data($trip->trip_conductor);
+                                $driver_data = get_driver($trip->dri_id);
+                                $conductor_data = get_conductor($trip->con_id);
                                 ?>
                                 <tr>
                                     <td>
                                         <div class="col-lg-3">
                                             <div class="card-box">
                                                 <div class="widget-chart text-center">
-                                                    <h4 class="text-muted"><?= $trip->bus_number ?></h4>
+                                                    <h4 class="text-muted"><?= $trip->bus_no ?></h4>
                                                     <h3 class="font-600"><?= $trip->trip_no ?></h3>
                                                     <span class="label label-table label-success"><?= trip_status($trip->trip_status); ?></span>
                                                     <ul class="list-inline m-t-15">
                                                         <li>
                                                             <h5 class="text-muted m-t-20">Driver</h5>
-                                                            <h4 class="m-b-0"><?= $driver_data->lastname; ?></h4>
+                                                            <h4 class="m-b-0"><?= $driver_data->l_name; ?></h4>
                                                         </li>
 
                                                         <li>
                                                             <h5 class="text-muted m-t-20">Conductor</h5>
-                                                            <h4 class="m-b-0"><?= $conductor_data->lastname; ?></h4>
+                                                            <h4 class="m-b-0"><?= $conductor_data->l_name; ?></h4>
                                                         </li>
                                                     </ul>
                                                 </div>
