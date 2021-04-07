@@ -69,6 +69,15 @@ class General_model extends CI_Model {
         }
     }
 
+    public function get_row_count_upgraded($from=null)
+    {
+        $this->db->from('que_details');
+        $this->db->where("que_details.que_stat_id=1 OR que_details.que_stat_id=3 AND que_details.from_ter=".`$from`, NULL, FALSE);
+        //$this->db->where("que_details.from_ter", $from);
+        $query = $this->db->count_all_results();
+        return $query;
+    }
+
     public function get_row_count($params = array())
     {
         if(array_key_exists("where", $params)){
@@ -76,6 +85,12 @@ class General_model extends CI_Model {
                 $this->db->where($key, $val);
             }
         }
+        if(array_key_exists("or_where", $params)){
+            foreach($params['or_where'] as $key => $val){
+                $this->db->or_where($key, $val);
+            }
+        }
+
 
         if(array_key_exists("table",$params) && $params['table'] != NULL ){
             $this->db->from($params['table']);

@@ -35,14 +35,8 @@ class Dashboard extends MY_Controller
         );
         $this->data['waiting'] = $this->general->get_row_count($get_waiting_count);
 
-        $get_torno_count = array(
-            'where' => array(
-                'que_stat_id' => 1,
-                'from_ter' => $terminal->descrip,
-            ),
-            'table' => 'que_details',
-        );
-        $this->data['torno'] = $this->general->get_row_count($get_torno_count);
+        //echo $terminal->descrip;
+        $this->data['torno'] = $this->general->get_row_count_upgraded($terminal->descrip);
 
         $get_road_count = array(
             'where' => array(
