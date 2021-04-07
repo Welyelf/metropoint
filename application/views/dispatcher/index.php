@@ -38,7 +38,7 @@
                             </div>
                         </a>
 
-                        <a href="#">
+                        <a href="<?= base_url(); ?>dispatcher/dashboard/view/1">
                             <div class="col-md-6 col-lg-3">
                                 <div class="widget-bg-color-icon card-box">
                                     <div class="bg-icon bg-icon-pink pull-left">
@@ -53,7 +53,7 @@
                             </div>
                         </a>
 
-                        <a href="<?= base_url(); ?>dispatcher/dashboard/view/1">
+                        <a href="<?= base_url(); ?>dispatcher/dashboard/incoming">
                         <div class="col-md-6 col-lg-3">
                             <div class="widget-bg-color-icon card-box">
                                 <div class="bg-icon bg-icon-purple pull-left">

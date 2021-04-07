@@ -21,10 +21,12 @@ $this->load->view('layout/topbar_dispatcher');
                         <?php
                             if($this->uri->segment(4) == 0){
                                 echo 'Bus Waiting on Queue.';
-                            }else if($this->uri->segment(4) == 1){
+                            }else if($this->uri->segment(4) == 1 && $this->uri->segment(3) == 'view'){
+                                echo 'Buses that are departed to this terminal.';
+                            }else if($this->uri->segment(4) == 1 && $this->uri->segment(3) == 'incoming'){
                                 echo 'Buses that are incoming to this terminal.';
                             }else if($this->uri->segment(4) == 2){
-                                echo 'On Road Buses.';
+                                echo 'Incoming Buses.';
                             }
                         ?>
                     </p>
@@ -73,7 +75,7 @@ $this->load->view('layout/topbar_dispatcher');
                                                             <i class="md md-filter-list m-r-5"></i> Depart
                                                         </a>
                                                     <?php endif; ?>
-                                                    <?php if($trip->trip_status == 1) :  ?>
+                                                    <?php if($trip->trip_status == 1 && $this->uri->segment(3) == 'incoming') :  ?>
                                                         <a id="<?=$trip->trip_id;?>" class="btn btn-default btn-sm m-b-20 on_road">
                                                             <i class="md  md-directions-bus m-r-5"></i> Arrived
                                                         </a>

@@ -129,13 +129,13 @@ class Dashboard extends MY_Controller
 
     public function incoming()
     {
-        $base_terminal_id = $_SESSION['user']->base_terminal;
+        $base_terminal_id = $_SESSION['user']->ter_id;
 
         $get_terminal = array(
             'where' => array(
-                'id' => $base_terminal_id,
+                'ter_id' => $base_terminal_id,
             ),
-            'table' => 'mp_terminals',
+            'table' => 'ter_details',
             'select' => '*',
         );
         $terminal = $this->general->get_data_with_param($get_terminal,FALSE);
@@ -145,25 +145,19 @@ class Dashboard extends MY_Controller
 
         $get_trips = array(
             'where' => array(
-                'mp_trips.status' => 2,
-                'trip_to' => $terminal->name,
+                'que_details.que_stat_id' => 1,
+                'que_details.to_ter' => $terminal->descrip,
             ),
-            'table' => 'mp_trips',
-            'select' => '*,mp_trips.id as trip_id,mp_trips.status as trip_status',
-            'join' => array(
-                'table' => 'mp_bus',
-                'statement' => 'mp_bus.id=mp_trips.trip_bus_id',
-                'join_as' => 'left',
-            ),
+            'table' => 'que_details',
+            'select' => '*,que_details.que_id as trip_id,que_details.que_stat_id as trip_status',
             'order' => array(
-                'order_by' => 'mp_trips.id',
+                'order_by' => 'que_details.que_id',
                 'ordering' => 'DESC',
             ),
         );
         $this->data['trips'] = $this->general->get_data_with_param($get_trips);
 
-
-        $this->load->view('dispatcher/incoming', $this->data);
+        $this->load->view('dispatcher/view', $this->data);
     }
 
 
