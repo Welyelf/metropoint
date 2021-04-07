@@ -23,9 +23,9 @@ $this->load->view('layout/topbar_driver');
             <div class="row">
                 <div class="col-md-12">
                         <b><?= $trip->trip_no; ?></b><br>
-                        <small>From : <b><?= $trip->trip_from; ?></b></small><br>
-                        <small>To : <b><?= $trip->trip_to; ?></b></small><br><br>
-                    <span class="label label-table label-success"><?= trip_status($trip->trip_status); ?></span><br><br>
+                        <small>From : <b><?= $trip->from_ter; ?></b></small><br>
+                        <small>To : <b><?= $trip->to_ter; ?></b></small><br><br>
+                    <span class="label label-table label-success"><?= trip_status($trip->que_stat_id); ?></span><br><br>
                 </div>
             </div>
 
@@ -97,7 +97,7 @@ $this->load->view('layout/topbar_driver');
             $.ajax({
                 type: "POST",
                 url: "/driver/dashboard/update_trip_coordinates",
-                data: {id : <?= $trip->trip_id; ?>,lat : e.latlng.lat, long : e.latlng.lng}, // serializes the form's elements.
+                data: {id : <?= $trip->que_id; ?>,lat : e.latlng.lat, long : e.latlng.lng}, // serializes the form's elements.
                 success: function(data)
                 {
                     console.log(data);

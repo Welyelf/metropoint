@@ -39,9 +39,9 @@ class Dashboard extends MY_Controller
     {
         $id = $_POST['id'];
         $input = array();
-        $input['trip_latitude'] = $_POST['lat'];
-        $input['trip_longitude'] = $_POST['long'];
-        if($this->general->update_($input,$id ,'mp_trips')){
+        $input['que_long'] = $_POST['lat'];
+        $input['que_lat'] = $_POST['long'];
+        if($this->general->update_($input,$id ,'que_details')){
             echo '1';
         }else{
             echo 'error';
