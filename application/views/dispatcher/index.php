@@ -81,14 +81,14 @@
                             </div>
                         </div>-->
 
-                        <a href="<?= base_url(); ?>dispatcher/dashboard/view/3">
+                        <a href="<?= base_url(); ?>dispatcher/dashboard/arrived">
                             <div class="col-md-6 col-lg-3">
                                 <div class="widget-bg-color-icon card-box">
                                     <div class="bg-icon bg-icon-success pull-left">
                                         <i class="fa fa-bus text-success"></i>
                                     </div>
                                     <div class="text-right">
-                                        <h3 class="text-dark"><b class="counter"><?= $incoming; ?></b></h3>
+                                        <h3 class="text-dark"><b class="counter"><?= $arrived; ?></b></h3>
                                         <p class="text-muted">Arrived</p>
                                     </div>
                                     <div class="clearfix"></div>

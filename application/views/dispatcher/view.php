@@ -54,8 +54,8 @@ $this->load->view('layout/topbar_dispatcher');
                                         <div class="col-lg-3">
                                             <div class="card-box">
                                                 <div class="widget-chart text-center">
-                                                    <h4 class="text-muted"><?= $trip->bus_no ?></h4>
-                                                    <h3 class="font-600"><?= $trip->trip_no ?></h3>
+                                                    <h4 class=" font-600"><?= $trip->bus_no ?></h4>
+                                                    <h3 class="text-muted"><?= $trip->trip_no ?></h3>
                                                     <span class="label label-table label-success"><?= trip_status($trip->trip_status); ?></span>
                                                     <ul class="list-inline m-t-15">
                                                         <li>
@@ -171,7 +171,7 @@ $this->load->view('layout/topbar_dispatcher');
                     $.ajax({
                         type: "POST",
                         url: "<?= base_url() ?>dispatcher/dashboard/change_status",
-                        data: {id : ID , status : 4}, // serializes the form's elements.
+                        data: {id : ID , busNo : <?= $trip->bus_no; ?>, driId : <?= $trip->dri_id; ?>, conId : <?= $trip->con_id; ?>}, // serializes the form's elements.
                         success: function(data)
                         {
                             if(data === "1"){

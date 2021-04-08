@@ -40,7 +40,7 @@ class Dashboard extends MY_Controller
 
         $get_road_count = array(
             'where' => array(
-                'que_stat_id' => 1,
+                'que_stat_arr_id' => 2,
                 'to_ter' => $terminal->descrip,
             ),
             'table' => 'que_details',
@@ -49,7 +49,7 @@ class Dashboard extends MY_Controller
 
         $get_arrived_count = array(
             'where' => array(
-                'que_stat_id' => 3,
+                'que_stat_arr_id' => 1,
                 'from_ter' => $terminal->descrip,
             ),
             'table' => 'que_details',
@@ -121,6 +121,38 @@ class Dashboard extends MY_Controller
         $this->load->view('dispatcher/view', $this->data);
     }
 
+    public function arrived($status=null)
+    {
+        $base_terminal_id = $_SESSION['user']->ter_id;
+
+        $get_terminal = array(
+            'where' => array(
+                'ter_id' => $base_terminal_id,
+            ),
+            'table' => 'ter_details',
+            'select' => '*',
+        );
+        $terminal = $this->general->get_data_with_param($get_terminal,FALSE);
+        //echo $terminal->name;
+
+        $this->data['title'] = "Metropoint - Users";
+
+        $get_trips = array(
+            'where' => array(
+                'que_details.que_stat_arr_id' => 1,
+                'que_details.from_ter' => $terminal->descrip,
+            ),
+            'table' => 'que_details',
+            'select' => '*,que_details.que_id as trip_id,que_details.que_stat_id as trip_status',
+            'order' => array(
+                'order_by' => 'que_details.que_id',
+                'ordering' => 'DESC',
+            ),
+        );
+        $this->data['trips'] = $this->general->get_data_with_param($get_trips);
+        $this->load->view('dispatcher/view', $this->data);
+    }
+
     public function incoming()
     {
         $base_terminal_id = $_SESSION['user']->ter_id;
@@ -157,6 +189,7 @@ class Dashboard extends MY_Controller
 
    public function change_status(){
         $id = $_POST['id'];
+        $bus_no = $_POST['busNo'];
         $bus_status_update = array(
             'que_stat_arr_id' => 1,
             'arr_date' => date('Y-m-d'),
@@ -165,6 +198,22 @@ class Dashboard extends MY_Controller
         if($this->general->update_que($bus_status_update,$id,'que_details')){
             echo '1';
         }
+
+       $bus_status_ = array(
+           'trip_stat_id' => 0,
+       );
+       $this->general->update_bus_stat($bus_status_,$bus_no,'bus_details');
+
+       $dri_status = array(
+           'trip_stat_id' => 0,
+       );
+       $this->general->update_driv_con_stat($dri_status,$_POST['driId'],'user_dri','dri_id');
+
+       $con_status = array(
+           'trip_stat_id' => 0,
+       );
+       $this->general->update_driv_con_stat($con_status,$_POST['conId'],'user_con','con_id');
+
    }
 
     public function change_status_depart(){

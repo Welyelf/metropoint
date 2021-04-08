@@ -186,6 +186,24 @@ class General_model extends CI_Model {
         }
     }
 
+    public function update_bus_stat($input, $id,$table)
+    {
+        if ($this->db->update($table, $input, array('bus_no' => $id))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function update_driv_con_stat($input, $id,$table,$fieldname)
+    {
+        if ($this->db->update($table, $input, array($fieldname => $id))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function update_with_key_field($input, $id,$table,$field)
     {
         //$input['date_modified'] = date('Y-m-d H:i:s');;
