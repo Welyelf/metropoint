@@ -157,22 +157,28 @@ class Dashboard extends MY_Controller
 
    public function change_status(){
         $id = $_POST['id'];
-
-        if($_POST['status'] == 1){
-            $arrID = 2;
-            $stat = 1;
-        }else if ($_POST['status'] == 4){
-            $arrID = 1;
-            $stat = 1;
-        }
         $bus_status_update = array(
-            'que_stat_id' => $stat,
-            'que_stat_arr_id' => $arrID
+            'que_stat_arr_id' => 1,
+            'arr_date' => date('Y-m-d'),
+            'arr_time' =>  date('H:i:s'),
         );
         if($this->general->update_que($bus_status_update,$id,'que_details')){
             echo '1';
         }
    }
+
+    public function change_status_depart(){
+        $id = $_POST['id'];
+        $bus_status_update = array(
+            'que_stat_id' => 1,
+            'que_stat_arr_id' => 2,
+            'dep_date' => date('Y-m-d'),
+            'dep_time' =>  date('H:i:s'),
+        );
+        if($this->general->update_que($bus_status_update,$id,'que_details')){
+            echo '1';
+        }
+    }
 
     public function delete_trip() {
         $remove_trip = array(

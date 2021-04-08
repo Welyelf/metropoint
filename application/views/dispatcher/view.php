@@ -139,7 +139,7 @@ $this->load->view('layout/topbar_dispatcher');
                 if (result.value) {
                     $.ajax({
                         type: "POST",
-                        url: "<?= base_url() ?>dispatcher/dashboard/change_status",
+                        url: "<?= base_url() ?>dispatcher/dashboard/change_status_depart",
                         data: {id : ID , status : 1}, // serializes the form's elements.
                         success: function(data)
                         {
