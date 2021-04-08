@@ -50,7 +50,7 @@ class Dashboard extends MY_Controller
         $get_arrived_count = array(
             'where' => array(
                 'que_stat_arr_id' => 1,
-                'from_ter' => $terminal->descrip,
+                'to_ter' => $terminal->descrip,
             ),
             'table' => 'que_details',
         );
