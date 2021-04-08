@@ -63,6 +63,21 @@ $this->load->view('layout/topbar_driver');
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.min.js"></script>
 
 <script type="text/javascript">
+    window.onload = function () {
+        if (Notification.permission === "granted") {
+            // If it's okay let's create a notification
+            var notification = new Notification(message);
+        }
+        // Otherwise, we need to ask the user for permission
+        else if (Notification.permission !== "denied") {
+            Notification.requestPermission().then(function (permission) {
+                // If the user accepts, let's create a notification
+                if (permission === "granted") {
+                    var notification = new Notification("Hi there!");
+                }
+            });
+        }
+    };
     $(document).ready(function() {
 
         var mymap = L.map('mapid').setView([7.3575577, 125.7035372], 15);
