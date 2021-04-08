@@ -74,7 +74,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if (isset($_SERVER['SERVER_NAME'])) {
     if ($_SERVER['SERVER_NAME'] == 'metropoint.local') {
         $active_group = 'default';
-    } else if ($_SERVER['SERVER_NAME'] == 'metropoint.rossybarb.com') {
+    } else if ($_SERVER['SERVER_NAME'] == 'mp.rossybarb.com') {
         $active_group = 'live';
     }
 }else{
@@ -87,7 +87,7 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
-	'database' => 'mpoint_db',
+	'database' => 'dms_metropoint',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
