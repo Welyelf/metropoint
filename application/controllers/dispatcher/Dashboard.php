@@ -56,14 +56,6 @@ class Dashboard extends MY_Controller
         );
         $this->data['arrived'] = $this->general->get_row_count($get_arrived_count);
 
-        $get_incoming = array(
-            'where' => array(
-                'que_stat_id' => 3,
-                'to_ter' => $terminal->descrip,
-            ),
-            'table' => 'que_details',
-        );
-        $this->data['incoming'] = $this->general->get_row_count($get_incoming);
 
 //        $get_trips = array(
 //            'where' => array(

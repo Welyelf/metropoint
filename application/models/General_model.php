@@ -72,7 +72,8 @@ class General_model extends CI_Model {
     public function get_row_count_upgraded($from=null)
     {
         $this->db->from('que_details');
-        $this->db->where("que_details.que_stat_id=1 OR que_details.que_stat_id=3 AND que_details.from_ter=".`$from`, NULL, FALSE);
+        $this->db->where("que_details.que_stat_arr_id,1");
+        $this->db->where("que_details.from_ter",$from);
         //$this->db->where("que_details.from_ter", $from);
         $query = $this->db->count_all_results();
         return $query;
