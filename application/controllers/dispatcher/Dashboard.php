@@ -113,7 +113,7 @@ class Dashboard extends MY_Controller
         $this->load->view('dispatcher/view', $this->data);
     }
 
-    public function arrived($status=null)
+    public function arrived()
     {
         $base_terminal_id = $_SESSION['user']->ter_id;
 
@@ -132,7 +132,7 @@ class Dashboard extends MY_Controller
         $get_trips = array(
             'where' => array(
                 'que_details.que_stat_arr_id' => 1,
-                'que_details.from_ter' => $terminal->descrip,
+                'que_details.to_ter' => $terminal->descrip,
             ),
             'table' => 'que_details',
             'select' => '*,que_details.que_id as trip_id,que_details.que_stat_id as trip_status',
