@@ -82,7 +82,6 @@ class Auth extends CI_Controller {
             }else{
                 $this->data['error'] = "Invalid Login.";
             }
-            exit;
         }
         $this->data['title'] = "RewardsVine - Login";
         $this->load->view('auth/index', $this->data);

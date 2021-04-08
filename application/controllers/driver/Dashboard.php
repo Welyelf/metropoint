@@ -41,7 +41,7 @@ class Dashboard extends MY_Controller
         $input = array();
         $input['que_long'] = $_POST['lat'];
         $input['que_lat'] = $_POST['long'];
-        if($this->general->update_($input,$id ,'que_details')){
+        if($this->general->update_que($input,$id ,'que_details')){
             echo '1';
         }else{
             echo 'error';
