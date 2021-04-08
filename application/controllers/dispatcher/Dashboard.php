@@ -163,7 +163,7 @@ class Dashboard extends MY_Controller
 
         $get_trips = array(
             'where' => array(
-                'que_details.que_stat_id' => 1,
+                'que_details.que_stat_arr_id' => 2,
                 'que_details.to_ter' => $terminal->descrip,
             ),
             'table' => 'que_details',
